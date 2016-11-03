@@ -45,8 +45,6 @@ public class SearchTree {
 		/* Do not modify the code above */
 		/* TODO: Start your implementation here, find m to schedule */
 		
-		int a = count(size);
-		System.out.println("count - " + a);
 		if(count(size) == 0) {
 			return -1;
 		}

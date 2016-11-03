@@ -45,8 +45,6 @@ public class SearchTree {
 		/* Do not modify the code above */
 		/* TODO: Start your implementation here, find m to schedule */
 		
-		int a = count(size);
-		System.out.println("count - " + a);
 		if(count(size) == 0) {
 			return -1;
 		}
@@ -71,13 +69,8 @@ public class SearchTree {
 			//if node doesn't have enough memory, go to the right
 			tracker = tracker.right;		
 		}
-		
-		
-		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added 
-		RedBlackBST.delete(root, bestOption); // delete machine in which job was added
-		RedBlackBST.insert(root, m); // add updated machine to tree
-		
-		jobs.addJob(jobid, size, m); // add new job to jobs 
+
+
 
 		/* Do not modify the following part */
 		scheduled++;

@@ -40,44 +40,13 @@ public class SearchTree {
 	//Update the free size and number of jobs on the machine
 	//Return machine id... -1 if no such machine exists
 	public int scheduleJobMinSpace(int jobid, int size) {
-		Node m; 
+		Node m = null; 
 		requests++;
 		/* Do not modify the code above */
 		/* TODO: Start your implementation here, find m to schedule */
-		
-		int a = count(size);
-		System.out.println("count - " + a);
-		if(count(size) == 0) {
-			return -1;
-		}
-		
-		Node tracker = root; // goes through the search tree to find machine
-		Node bestOption = tracker; // stores best option
-		
-		while(tracker.left != null && tracker.right != null) {
-			//check if current node holds same free space as size
-			if(tracker.free ==  size) {
-				bestOption = tracker;
-				break;
-			}
-			//check if current node can hold job, if it can, see if it has lesser memory that bestOption
-			if(tracker.free > size) {
-				if(tracker.free < bestOption.free) {
-					bestOption = tracker;
-				}
-				tracker = tracker.left;
-				continue;
-			}
-			//if node doesn't have enough memory, go to the right
-			tracker = tracker.right;		
-		}
-		
-		
-		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added 
-		RedBlackBST.delete(root, bestOption); // delete machine in which job was added
-		RedBlackBST.insert(root, m); // add updated machine to tree
-		
-		jobs.addJob(jobid, size, m); // add new job to jobs 
+
+
+
 
 		/* Do not modify the following part */
 		scheduled++;

@@ -51,12 +51,12 @@ public class TestTree {
 			return;
 		}
 		/* Build Initial Tree with m machines*/
-		SearchTree stree = new SearchTree(freeSpace,numOfMachine);
+		SearchTreeImplemented stree = new SearchTreeImplemented(freeSpace,numOfMachine);
 		/* Read input Query */
 		readInputQuery(stree, strategy);
 	}
 
-	public static void readInputQuery(SearchTree st, int strategy){
+	public static void readInputQuery(SearchTreeImplemented st, int strategy){
 		Scanner s = new Scanner(System.in);
 		int queries = 0;
 		while (s.hasNext()){
