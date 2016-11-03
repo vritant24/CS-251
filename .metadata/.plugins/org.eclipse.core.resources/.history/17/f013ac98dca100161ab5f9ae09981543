@@ -95,9 +95,7 @@ public class SearchTree {
 		if(count(size) == 0) {
 			return -1;
 		}
-		
-		Node toUse = findMinJobNode(root, size);
-		
+
 		/* Do not modify the following part */
 		machineLoads[m.id] ++;
 		requests++;
@@ -105,19 +103,23 @@ public class SearchTree {
 		return m.id;
 	}
 	
-	/**
-	 * Returns the node with the least number of jobs in the subtree of node
-	 * @param node
-	 * @param size
-	 * @return node with minimum jobs and at least free space size
-	 */
 	public Node findMinJobNode(Node node, int size) {
 		
 		if(node.free < size) {
 			return findMinJobNode(node.right, size);
 		}
 		
+		if(node.minJobsNode.numjobs > node.numjobs) {
+			return node;
+		}
 		
+		if(node.left == null) {
+			return 
+		}
+		Node leftMin = findMinJobNode(node.left, size);
+		Node rightMin = findMinJobNode(node.right, size);
+				
+		return (leftMin.numjobs < rightMin.numjobs) ? leftMin : rightMin;
 	}
 	
 	//Update the free space and number of jobs on machine releasing a job

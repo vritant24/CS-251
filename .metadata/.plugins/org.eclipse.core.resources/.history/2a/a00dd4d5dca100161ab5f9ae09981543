@@ -109,7 +109,7 @@ public class SearchTree {
 	 * Returns the node with the least number of jobs in the subtree of node
 	 * @param node
 	 * @param size
-	 * @return node with minimum jobs and at least free space size
+	 * @return node with minimum jobs
 	 */
 	public Node findMinJobNode(Node node, int size) {
 		
