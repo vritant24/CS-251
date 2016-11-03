@@ -45,6 +45,8 @@ public class SearchTree {
 		/* Do not modify the code above */
 		/* TODO: Start your implementation here, find m to schedule */
 		
+		int a = count(size);
+		System.out.println("count - " + a);
 		if(count(size) == 0) {
 			return -1;
 		}
@@ -127,19 +129,19 @@ public class SearchTree {
 	 * @return count of nodes with free space mem
 	 */
 	public int countNodes(Node node, int mem) {
-
+		int count = 0;
+		
 		if(node.free < mem) {
 			return countNodes(node.right, mem);
 		}
 		
 		if(node.right == null) {
-			return 1;
+			return 0;
 		}
 		
-		if(node.left == null) {
-			return (1 + node.right.size);
-		}
-		return (1 + node.right.size + countNodes(node.left, mem));
+		count = 1 + node.right.size + countNodes(node.left, mem);
+		
+		return count;
 	}
 	
 	/*
