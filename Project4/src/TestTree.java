@@ -5,10 +5,7 @@
 
 import java.util.*;
 
-
 public class TestTree {
-	
-
 	
 	public static void main(String[] args){
 		int numOfMachine = 0;
