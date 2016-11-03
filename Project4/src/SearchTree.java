@@ -40,7 +40,7 @@ public class SearchTree {
 	//Update the free size and number of jobs on the machine
 	//Return machine id... -1 if no such machine exists
 	public int scheduleJobMinSpace(int jobid, int size) {
-		Node m; 
+		Node m = null; 
 		requests++;
 		/* Do not modify the code above */
 		/* TODO: Start your implementation here, find m to schedule */
@@ -60,7 +60,7 @@ public class SearchTree {
 	//Return machine id... -1 if no such machine exists
 	public int scheduleJobMinJob(int jobid, int size) {
 		
-		Node m;
+		Node m = null;
 
 		/* TODO: Start your implementation here: Find node m to schedule the job  */
 
@@ -87,6 +87,27 @@ public class SearchTree {
 	public int count(int free){
 		
 		/* TODO: start your implementation here */
+		return countNodes(root, free);
+	}
+	
+	/**
+	 * Counts the number of nodes under the subtree of node given
+	 * with free space mem
+	 * @param node
+	 * @param mem
+	 * @return count of nodes with free space mem
+	 */
+	public int countNodes(Node node, int mem) {
+		int count = 0;
+		
+		if(node.free < mem) {
+			return countNodes(node.right, mem);
+		}
+		else {
+			count = 1 + node.right.size + countNodes(node.left, mem);
+		}
+		
+		return count;
 	}
 	
 	/*
