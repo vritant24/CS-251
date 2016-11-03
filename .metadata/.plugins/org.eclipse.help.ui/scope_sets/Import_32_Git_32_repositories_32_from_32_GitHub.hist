@@ -1,0 +1,4 @@
+#Wed Nov 02 20:52:13 EDT 2016
+__DEFAULT__=false
+org.eclipse.help.ui.localSearch.master=true
+expression=Import Git repositories from GitHub
