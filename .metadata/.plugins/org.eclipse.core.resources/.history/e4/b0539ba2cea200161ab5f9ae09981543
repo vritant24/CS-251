@@ -75,8 +75,7 @@ public class SearchTree {
 			if(tracker.right == null) {
 				break;
 			}
-			tracker = tracker.right;
-			bestOption = tracker;
+			tracker = tracker.right;		
 		}
 		
 		System.out.println("size before - " + bestOption.free + " size added - " + size);
@@ -111,12 +110,7 @@ public class SearchTree {
 		}
 		
 		Node toUse = findMinJobNode(root, size);
-		System.out.println("size before - " + toUse.free + " size added - " + size + " numjobs - " + toUse.numjobs);
-		
 		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
-		
-		System.out.println("node added - " + m.id + " space left - " + m.free);
-		System.out.println();
 		root = RedBlackBST.delete(root, toUse);
 		RedBlackBST.insert(root, m);
 		
@@ -200,7 +194,7 @@ public class SearchTree {
 			return countNodes(node.right, mem);
 		}
 		
-		if(node.size == 1) {
+		if(node.size - 1 == 0) {
 			return 1;
 		}
 		
