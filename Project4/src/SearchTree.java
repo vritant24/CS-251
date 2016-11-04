@@ -45,6 +45,8 @@ public class SearchTree {
 		/* Do not modify the code above */
 		/* TODO: Start your implementation here, find m to schedule */
 		
+		int a = count(size);
+		System.out.println("count - " + a);
 		if(count(size) == 0) {
 			return -1;
 		}
@@ -52,7 +54,7 @@ public class SearchTree {
 		Node tracker = root; // goes through the search tree to find machine
 		Node bestOption = tracker; // stores best option
 		
-		while(tracker.left != null && tracker.right != null) {
+		while(true) {
 			//check if current node holds same free space as size
 			if(tracker.free ==  size) {
 				bestOption = tracker;
@@ -63,16 +65,27 @@ public class SearchTree {
 				if(tracker.free < bestOption.free) {
 					bestOption = tracker;
 				}
+				if(tracker.left == null) {
+					break;
+				}
 				tracker = tracker.left;
 				continue;
 			}
 			//if node doesn't have enough memory, go to the right
+			if(tracker.right == null) {
+				break;
+			}
 			tracker = tracker.right;		
 		}
 		
+		System.out.println("size before - " + bestOption.free + " size added - " + size);
 		
-		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added 
-		RedBlackBST.delete(root, bestOption); // delete machine in which job was added
+		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added
+		
+		System.out.println("node added - " + m.id + " space left - " + m.free);
+		System.out.println();
+		
+		root = RedBlackBST.delete(root, bestOption); // delete machine in which job was added
 		RedBlackBST.insert(root, m); // add updated machine to tree
 		
 		jobs.addJob(jobid, size, m); // add new job to jobs 
@@ -98,7 +111,7 @@ public class SearchTree {
 		
 		Node toUse = findMinJobNode(root, size);
 		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
-		RedBlackBST.delete(root, toUse);
+		root = RedBlackBST.delete(root, toUse);
 		RedBlackBST.insert(root, m);
 		
 		jobs.addJob(jobid, size, m);
@@ -124,7 +137,7 @@ public class SearchTree {
 		
 		Node bestOption = node;
 		
-		if(node.right == null && node.left == null) {
+		if(node.size == 0) {
 			return node;
 		}
 		
@@ -172,13 +185,24 @@ public class SearchTree {
 	 * @return count of nodes with free space mem
 	 */
 	public int countNodes(Node node, int mem) {
-
+		
+		if(node == null) {
+			return 0;
+		}
+		
 		if(node.free < mem) {
+			if(node.right == null) {
+				return 0;
+			}
 			return countNodes(node.right, mem);
 		}
 		
-		if(node.right == null) {
+		if(node.size == 0) {
 			return 1;
+		}
+		
+		if(node.right == null) {
+			return 1 + countNodes(node.left, mem);
 		}
 		
 		if(node.left == null) {
