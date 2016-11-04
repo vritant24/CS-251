@@ -89,7 +89,7 @@ public class SearchTree {
 	//Return machine id... -1 if no such machine exists
 	public int scheduleJobMinJob(int jobid, int size) {
 		
-		Node m;
+		Node m = null;
 		requests++;
 		/* TODO: Start your implementation here: Find node m to schedule the job  */
 		if(count(size) == 0) {
@@ -97,11 +97,7 @@ public class SearchTree {
 		}
 		
 		Node toUse = findMinJobNode(root, size);
-		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
-		RedBlackBST.delete(root, toUse);
-		RedBlackBST.insert(root, m);
 		
-		jobs.addJob(jobid, size, m);
 		/* Do not modify the following part */
 		machineLoads[m.id] ++;
 		scheduled++;
@@ -115,37 +111,12 @@ public class SearchTree {
 	 * @return node with minimum jobs and at least free space size
 	 */
 	public Node findMinJobNode(Node node, int size) {
+		
 		if(node.free < size) {
-			if(node.right == null) {
-				return null;
-			}
 			return findMinJobNode(node.right, size);
 		}
 		
-		Node bestOption = node;
 		
-		if(node.right == null && node.left == null) {
-			return node;
-		}
-		
-		if (node.right != null) {
-			if(node.right.minJobsNode.numjobs > node.numjobs) {
-				bestOption = node.minJobsNode;
-			}
-		}
-		
-		if(node.left != null) {
-			Node left = findMinJobNode(node.left, size);
-			
-			if(left != null && left.numjobs <= bestOption.numjobs) {
-				if(left.numjobs == bestOption.numjobs) {
-					return (left.size < bestOption.size) ? left : bestOption;
-				}
-				return left;
-			}
-		}
-		
-		return bestOption;
 	}
 	
 	//Update the free space and number of jobs on machine releasing a job

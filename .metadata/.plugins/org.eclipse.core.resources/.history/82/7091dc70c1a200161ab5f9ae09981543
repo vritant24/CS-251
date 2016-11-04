@@ -97,11 +97,9 @@ public class SearchTree {
 		}
 		
 		Node toUse = findMinJobNode(root, size);
-		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
+		m = new Node(toUse.id, toUse.free, toUse.numjobs);
 		RedBlackBST.delete(root, toUse);
 		RedBlackBST.insert(root, m);
-		
-		jobs.addJob(jobid, size, m);
 		/* Do not modify the following part */
 		machineLoads[m.id] ++;
 		scheduled++;

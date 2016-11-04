@@ -89,7 +89,7 @@ public class SearchTree {
 	//Return machine id... -1 if no such machine exists
 	public int scheduleJobMinJob(int jobid, int size) {
 		
-		Node m;
+		Node m = null;
 		requests++;
 		/* TODO: Start your implementation here: Find node m to schedule the job  */
 		if(count(size) == 0) {
@@ -97,11 +97,7 @@ public class SearchTree {
 		}
 		
 		Node toUse = findMinJobNode(root, size);
-		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
-		RedBlackBST.delete(root, toUse);
-		RedBlackBST.insert(root, m);
 		
-		jobs.addJob(jobid, size, m);
 		/* Do not modify the following part */
 		machineLoads[m.id] ++;
 		scheduled++;
@@ -144,7 +140,6 @@ public class SearchTree {
 				return left;
 			}
 		}
-		
 		return bestOption;
 	}
 	
