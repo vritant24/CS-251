@@ -173,15 +173,10 @@ public class SearchTree {
 	
 	//Update the free space and number of jobs on machine releasing a job
 	public void releaseJob(int jobid) {
-		
+
 		Node m = jobs.jobMachine(jobid);
 		/* TODO: Release m */
-		int size = jobs.jobSize(jobid);
-		jobs.deleteJob(jobid, m);
-		Node newM = new Node(m.id, m.free + size, m.numjobs - 1);
-		RedBlackBST.delete(root, m);
-		RedBlackBST.insert(root, newM);
-		
+
 		machineLoads[m.id]--;
 	}
 	

@@ -136,23 +136,20 @@ public class SearchTree {
 	public Node findMinJobNode(Node node, int size) {
 		//if current node's size isn't enough, go right
 		if(node.free < size) {
-			//if no right path exists, return null
 			if(node.right == null) {
 				return null;
 			}
 			return findMinJobNode(node.right, size);
 		}
 		
-		//if node doesn't have children, return node itself
-		if(node.size == 1) {
+		Node bestOption = node;
+		
+		if(node.size == 0) {
 			return node;
 		}
 		
-		Node bestOption = node;
-		
-		
 		if (node.right != null) {
-			if(node.right.minJobsNode.numjobs < node.numjobs) {
+			if(node.right.minJobsNode.numjobs > node.numjobs) {
 				bestOption = node.minJobsNode;
 			}
 		}
@@ -173,15 +170,10 @@ public class SearchTree {
 	
 	//Update the free space and number of jobs on machine releasing a job
 	public void releaseJob(int jobid) {
-		
+
 		Node m = jobs.jobMachine(jobid);
 		/* TODO: Release m */
-		int size = jobs.jobSize(jobid);
-		jobs.deleteJob(jobid, m);
-		Node newM = new Node(m.id, m.free + size, m.numjobs - 1);
-		RedBlackBST.delete(root, m);
-		RedBlackBST.insert(root, newM);
-		
+
 		machineLoads[m.id]--;
 	}
 	
