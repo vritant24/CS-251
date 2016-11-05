@@ -148,23 +148,21 @@ public class SearchTree {
 			return node;
 		}
 		
-		Node bestOption = node; // stores best option
+		Node bestOption = node;
 		
-		// if node has a right child, find machine with minimum jobs on right side
+		
 		if (node.right != null) {
 			if(node.right.minJobsNode.numjobs < node.numjobs) {
 				bestOption = node.minJobsNode;
 			}
 		}
 		
-		//if node has a left child, find machine with minimum jobs on left side
 		if(node.left != null) {
 			Node left = findMinJobNode(node.left, size);
 			
 			if(left != null && left.numjobs <= bestOption.numjobs) {
-				//if bestOption and left have the same number of jobs, return the one with lesser free space
 				if(left.numjobs == bestOption.numjobs) {
-					return (left.free < bestOption.free) ? left : bestOption;
+					return (left.size < bestOption.size) ? left : bestOption;
 				}
 				return left;
 			}
@@ -181,19 +179,14 @@ public class SearchTree {
 		
 		Node m = jobs.jobMachine(jobid);
 		/* TODO: Release m */
-		
-		// if jobid doesn't exist
 		if(m == null) {
 			return;
 		}
 		
-		int size = jobs.jobSize(jobid); // the amount of memory that the job takes
+		int size = jobs.jobSize(jobid);
+		Node newM = new Node(m.id, m.free + size, m.numjobs - 1);
+		jobs.deleteJob(jobid, m);
 		
-		Node newM = new Node(m.id, m.free + size, m.numjobs - 1); // the machine after removing the job
-		
-		jobs.deleteJob(jobid, m); // delete job with jobid from jobs
-		
-		//update machine in tree
 		RedBlackBST.delete(root, m);
 		RedBlackBST.insert(root, newM);
 
@@ -226,22 +219,17 @@ public class SearchTree {
 			return countNodes(node.right, mem);
 		}
 		
-		// if node is a leaf
 		if(node.size == 1) {
 			return 1;
 		}
 		
-		// if node doesn't have a right child
 		if(node.right == null) {
 			return 1 + countNodes(node.left, mem);
 		}
 		
-		// if node doesn't have a left child
 		if(node.left == null) {
 			return (1 + node.right.size);
 		}
-		
-		// if node has both left and right children
 		return (1 + node.right.size + countNodes(node.left, mem));
 	}
 	

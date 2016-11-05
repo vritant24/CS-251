@@ -157,14 +157,13 @@ public class SearchTree {
 			}
 		}
 		
-		//if node has a left child, find machine with minimum jobs on left side
+		//if node has a left child
 		if(node.left != null) {
 			Node left = findMinJobNode(node.left, size);
 			
 			if(left != null && left.numjobs <= bestOption.numjobs) {
-				//if bestOption and left have the same number of jobs, return the one with lesser free space
 				if(left.numjobs == bestOption.numjobs) {
-					return (left.free < bestOption.free) ? left : bestOption;
+					return (left.size < bestOption.size) ? left : bestOption;
 				}
 				return left;
 			}
