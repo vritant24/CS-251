@@ -184,11 +184,11 @@ public class SearchTree {
 		
 		int size = jobs.jobSize(jobid);
 		Node newM = new Node(m.id, m.free + size, m.numjobs - 1);
-		jobs.deleteJob(jobid, m);
 		
 		RedBlackBST.delete(root, m);
 		RedBlackBST.insert(root, newM);
-
+		
+		jobs.deleteJob(jobid, m);
 		
 		machineLoads[m.id]--;
 	}

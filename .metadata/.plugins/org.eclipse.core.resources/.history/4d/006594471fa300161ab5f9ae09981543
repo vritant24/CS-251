@@ -45,8 +45,8 @@ public class SearchTree {
 		/* Do not modify the code above */
 		/* TODO: Start your implementation here, find m to schedule */
 		
-		//int a = count(size);
-		//System.out.println("count - " + a);
+		int a = count(size);
+		System.out.println("count - " + a);
 		if(count(size) == 0) {
 			return -1;
 		}
@@ -79,12 +79,12 @@ public class SearchTree {
 			bestOption = tracker;
 		}
 		
-		//System.out.println("size before - " + bestOption.free + " size added - " + size);
+		System.out.println("size before - " + bestOption.free + " size added - " + size);
 		
 		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added
 		
-		//System.out.println("node added - " + m.id + " space left - " + m.free);
-		//System.out.println();
+		System.out.println("node added - " + m.id + " space left - " + m.free);
+		System.out.println();
 		
 		root = RedBlackBST.delete(root, bestOption); // delete machine in which job was added
 		RedBlackBST.insert(root, m); // add updated machine to tree
@@ -111,12 +111,12 @@ public class SearchTree {
 		}
 		
 		Node toUse = findMinJobNode(root, size);
-		//System.out.println("size before - " + toUse.free + " size added - " + size + " numjobs - " + toUse.numjobs);
+		System.out.println("size before - " + toUse.free + " size added - " + size + " numjobs - " + toUse.numjobs);
 		
 		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
 		
-		//System.out.println("node added - " + m.id + " space left - " + m.free);
-		//System.out.println();
+		System.out.println("node added - " + m.id + " space left - " + m.free);
+		System.out.println();
 		root = RedBlackBST.delete(root, toUse);
 		RedBlackBST.insert(root, m);
 		
@@ -173,22 +173,19 @@ public class SearchTree {
 	
 	//Update the free space and number of jobs on machine releasing a job
 	public void releaseJob(int jobid) {
-		if(root == null) {
-			return;
-		}
+		
 		Node m = jobs.jobMachine(jobid);
 		/* TODO: Release m */
-		if(m == null) {
+		
+		if(jobs.jobMachine(jobid) == null) {
 			return;
 		}
 		
 		int size = jobs.jobSize(jobid);
-		Node newM = new Node(m.id, m.free + size, m.numjobs - 1);
 		jobs.deleteJob(jobid, m);
-		
+		Node newM = new Node(m.id, m.free + size, m.numjobs - 1);
 		RedBlackBST.delete(root, m);
 		RedBlackBST.insert(root, newM);
-
 		
 		machineLoads[m.id]--;
 	}
