@@ -8,6 +8,6 @@
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="TestTree"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-m 10 200 -s minSpace &lt;testFiles/3k.txt"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-m 4 100 -s minSpace &lt;testFiles/3k.txt"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Project4"/>
 </launchConfiguration>

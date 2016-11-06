@@ -79,16 +79,15 @@ public class SearchTree {
 			bestOption = tracker;
 		}
 		
-		//System.out.println("size before - " + bestOption.free + " size added - " + size);
+		System.out.println("size before - " + bestOption.free + " size added - " + size);
 		
 		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added
 		
-		//System.out.println("node added - " + m.id + " space left - " + m.free);
-		//System.out.println();
+		System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
+		System.out.println();
 		
 		root = RedBlackBST.delete(root, bestOption); // delete machine in which job was added
 		RedBlackBST.insert(root, m); // add updated machine to tree
-		
 		jobs.addJob(jobid, size, m); // add new job to jobs 
 
 		/* Do not modify the following part */
@@ -187,6 +186,8 @@ public class SearchTree {
 			return;
 		}
 		
+		System.out.println("deleted job - " + jobid + " machine - " + m.id);
+		
 		int size = jobs.jobSize(jobid); // the amount of memory that the job takes
 		
 		Node newM = new Node(m.id, m.free + size, m.numjobs - 1); // the machine after removing the job
@@ -194,7 +195,7 @@ public class SearchTree {
 		jobs.deleteJob(jobid, m); // delete job with jobid from jobs
 		
 		//update machine in tree
-		RedBlackBST.delete(root, m);
+		root = RedBlackBST.delete(root, m);
 		RedBlackBST.insert(root, newM);
 
 		

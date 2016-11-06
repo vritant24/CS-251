@@ -45,6 +45,8 @@ public class SearchTree {
 		/* Do not modify the code above */
 		/* TODO: Start your implementation here, find m to schedule */
 		
+		//int a = count(size);
+		//System.out.println("count - " + a);
 		if(count(size) == 0) {
 			return -1;
 		}
@@ -52,7 +54,7 @@ public class SearchTree {
 		Node tracker = root; // goes through the search tree to find machine
 		Node bestOption = tracker; // stores best option
 		
-		while(tracker.left != null && tracker.right != null) {
+		while(true) {
 			//check if current node holds same free space as size
 			if(tracker.free ==  size) {
 				bestOption = tracker;
@@ -63,18 +65,29 @@ public class SearchTree {
 				if(tracker.free < bestOption.free) {
 					bestOption = tracker;
 				}
+				if(tracker.left == null) {
+					break;
+				}
 				tracker = tracker.left;
 				continue;
 			}
 			//if node doesn't have enough memory, go to the right
-			tracker = tracker.right;		
+			if(tracker.right == null) {
+				break;
+			}
+			tracker = tracker.right;
+			bestOption = tracker;
 		}
 		
+		System.out.println("size before - " + bestOption.free + " size added - " + size);
 		
-		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added 
-		RedBlackBST.delete(root, bestOption); // delete machine in which job was added
+		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added
+		
+		System.out.println("node added - " + m.id + " space left - " + m.free);
+		System.out.println();
+		
+		root = RedBlackBST.delete(root, bestOption); // delete machine in which job was added
 		RedBlackBST.insert(root, m); // add updated machine to tree
-		
 		jobs.addJob(jobid, size, m); // add new job to jobs 
 
 		/* Do not modify the following part */
@@ -89,7 +102,7 @@ public class SearchTree {
 	//Return machine id... -1 if no such machine exists
 	public int scheduleJobMinJob(int jobid, int size) {
 		
-		Node m = null;
+		Node m;
 		requests++;
 		/* TODO: Start your implementation here: Find node m to schedule the job  */
 		if(count(size) == 0) {
@@ -97,7 +110,16 @@ public class SearchTree {
 		}
 		
 		Node toUse = findMinJobNode(root, size);
+		//System.out.println("size before - " + toUse.free + " size added - " + size + " numjobs - " + toUse.numjobs);
 		
+		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
+		
+		//System.out.println("node added - " + m.id + " space left - " + m.free);
+		//System.out.println();
+		root = RedBlackBST.delete(root, toUse);
+		RedBlackBST.insert(root, m);
+		
+		jobs.addJob(jobid, size, m);
 		/* Do not modify the following part */
 		machineLoads[m.id] ++;
 		scheduled++;
@@ -111,44 +133,72 @@ public class SearchTree {
 	 * @return node with minimum jobs and at least free space size
 	 */
 	public Node findMinJobNode(Node node, int size) {
+		//if current node's size isn't enough, go right
 		if(node.free < size) {
+			//if no right path exists, return null
 			if(node.right == null) {
 				return null;
 			}
 			return findMinJobNode(node.right, size);
 		}
 		
-		Node bestOption = node;
-		
-		if(node.right == null && node.left == null) {
+		//if node doesn't have children, return node itself
+		if(node.size == 1) {
 			return node;
 		}
 		
+		Node bestOption = node; // stores best option
+		
+		// if node has a right child, find machine with minimum jobs on right side
 		if (node.right != null) {
-			if(node.right.minJobsNode.numjobs > node.numjobs) {
+			if(node.right.minJobsNode.numjobs < node.numjobs) {
 				bestOption = node.minJobsNode;
 			}
 		}
 		
+		//if node has a left child, find machine with minimum jobs on left side
 		if(node.left != null) {
 			Node left = findMinJobNode(node.left, size);
 			
 			if(left != null && left.numjobs <= bestOption.numjobs) {
+				//if bestOption and left have the same number of jobs, return the one with lesser free space
 				if(left.numjobs == bestOption.numjobs) {
-					return (left.size < bestOption.size) ? left : bestOption;
+					return (left.free < bestOption.free) ? left : bestOption;
 				}
 				return left;
 			}
 		}
+		
 		return bestOption;
 	}
 	
 	//Update the free space and number of jobs on machine releasing a job
 	public void releaseJob(int jobid) {
-
+		if(root == null) {
+			return;
+		}
+		
 		Node m = jobs.jobMachine(jobid);
 		/* TODO: Release m */
+		
+		// if jobid doesn't exist
+		if(m == null) {
+			return;
+		}
+		
+		System.out.println("deleted job - " + jobid + " machine - " + m.id);
+		
+		int size = jobs.jobSize(jobid); // the amount of memory that the job takes
+		
+		Node newM = new Node(m.id, m.free + size, m.numjobs - 1); // the machine after removing the job
+		
+		jobs.deleteJob(jobid, m); // delete job with jobid from jobs
+		
+		//update machine in tree
+		RedBlackBST.delete(root, m);
+		RedBlackBST.insert(root, newM);
 
+		
 		machineLoads[m.id]--;
 	}
 	
@@ -167,18 +217,32 @@ public class SearchTree {
 	 * @return count of nodes with free space mem
 	 */
 	public int countNodes(Node node, int mem) {
-
+		
+		if(node == null) {
+			return 0;
+		}
+		
+		// if node doesn't have enough free space, go the the right child
 		if(node.free < mem) {
 			return countNodes(node.right, mem);
 		}
 		
-		if(node.right == null) {
+		// if node is a leaf
+		if(node.size == 1) {
 			return 1;
 		}
 		
+		// if node doesn't have a right child
+		if(node.right == null) {
+			return 1 + countNodes(node.left, mem);
+		}
+		
+		// if node doesn't have a left child
 		if(node.left == null) {
 			return (1 + node.right.size);
 		}
+		
+		// if node has both left and right children
 		return (1 + node.right.size + countNodes(node.left, mem));
 	}
 	
