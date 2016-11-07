@@ -137,7 +137,7 @@ public class SearchTree {
 		if(node.free < size) {
 			//if no right path exists, return null
 			if(node.right == null) {
-				return node;
+				return null;
 			}
 			return findMinJobNode(node.right, size);
 		}
