@@ -80,7 +80,7 @@ public class SearchTree {
 			tracker = tracker.right;
 			if(flag == 0) {
 				bestOption = tracker;
- 			}
+			}
 			//bestOption = tracker;
 		}
 		

@@ -54,7 +54,6 @@ public class SearchTree {
 		Node tracker = root; // goes through the search tree to find machine
 		Node bestOption = tracker; // stores best option
 		
-		int flag = 0;
 		while(true) {
 			//check if current node holds same free space as size
 			if(tracker.free ==  size) {
@@ -63,10 +62,14 @@ public class SearchTree {
 			}
 			//check if current node can hold job, if it can, see if it has lesser memory that bestOption
 			if(tracker.free > size) {
-				flag = 1;
 				if(tracker.free < bestOption.free) {
 					bestOption = tracker;
-				}  
+				}
+				if(tracker.free == bestOption.free) {
+					if(tracker.id < bestOption.id) {
+						bestOption = tracker;
+					}
+				}
 				if(tracker.left == null) {
 					break;
 				}
@@ -78,10 +81,7 @@ public class SearchTree {
 				break;
 			}
 			tracker = tracker.right;
-			if(flag == 0) {
-				bestOption = tracker;
- 			}
-			//bestOption = tracker;
+			bestOption = tracker;
 		}
 		
 		System.out.println("size before - " + bestOption.free + " size added - " + size);
