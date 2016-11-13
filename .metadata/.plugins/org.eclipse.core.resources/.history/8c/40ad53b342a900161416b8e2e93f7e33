@@ -92,7 +92,7 @@ public class SearchTree {
 		System.out.println();
 		
 		root = RedBlackBST.delete(root, bestOption); // delete machine in which job was added
-		root = RedBlackBST.insert(root, m); // add updated machine to tree
+		RedBlackBST.insert(root, m); // add updated machine to tree
 		jobs.addJob(jobid, size, m); // add new job to jobs 
 
 		/* Do not modify the following part */
@@ -122,7 +122,7 @@ public class SearchTree {
 		System.out.println("node added - " + m.id + " space left - " + m.free);
 		System.out.println();
 		root = RedBlackBST.delete(root, toUse);
-		root = RedBlackBST.insert(root, m);
+		RedBlackBST.insert(root, m);
 		
 		jobs.addJob(jobid, size, m);
 		/* Do not modify the following part */
@@ -168,9 +168,6 @@ public class SearchTree {
 			if(left != null && left.numjobs <= bestOption.numjobs) {
 				//if bestOption and left have the same number of jobs, return the one with lesser free space
 				if(left.numjobs == bestOption.numjobs) {
-					if(left.free == bestOption.free) {
-						return (left.id < bestOption.id) ? left : bestOption;
-					}
 					return (left.free < bestOption.free) ? left : bestOption;
 				}
 				return left;
@@ -204,7 +201,7 @@ public class SearchTree {
 		
 		//update machine in tree
 		root = RedBlackBST.delete(root, m);
-		root = RedBlackBST.insert(root, newM);
+		RedBlackBST.insert(root, newM);
 
 		
 		machineLoads[m.id]--;

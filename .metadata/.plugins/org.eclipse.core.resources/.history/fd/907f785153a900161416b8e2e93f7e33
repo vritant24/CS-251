@@ -1,4 +1,4 @@
-Use parameter N = 25 and M = 100. 
+wUse parameter N = 25 and M = 100. 
 out2ms is the solution for running small2.txt using min space strategy. 
 out2mj is the solution for running small2.txt using min job strategy. 
 out4ms is the solution for running small4.txt using min space strategy. 

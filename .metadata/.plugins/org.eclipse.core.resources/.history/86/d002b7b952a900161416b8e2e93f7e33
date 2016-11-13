@@ -168,9 +168,6 @@ public class SearchTree {
 			if(left != null && left.numjobs <= bestOption.numjobs) {
 				//if bestOption and left have the same number of jobs, return the one with lesser free space
 				if(left.numjobs == bestOption.numjobs) {
-					if(left.free == bestOption.free) {
-						return (left.id < bestOption.id) ? left : bestOption;
-					}
 					return (left.free < bestOption.free) ? left : bestOption;
 				}
 				return left;
