@@ -149,24 +149,16 @@ public class SearchTree {
 		
 		//if node doesn't have children, return node itself
 		if(node.size == 1) {
-			return node;
+			return null;
 		}
 		
 		Node bestOption = node; // stores best option
 		
 		// if node has a right child, find machine with minimum jobs on right side
-		if(node.right != null) {
-			if(node.right.minJobsNode.numjobs <= node.numjobs) {
-				if(node.right.minJobsNode.numjobs == node.numjobs) {
-					if(node.right.minJobsNode.id < node.id) {
-						bestOption = node.minJobsNode;
-					}
-				}
-				else {
-					bestOption = node.minJobsNode;
-				}
+		if (node.right != null) {
+			if(node.right.minJobsNode.numjobs < node.numjobs) {
+				bestOption = node.minJobsNode;
 			}
-			
 		}
 		
 		//if node has a left child, find machine with minimum jobs on left side
