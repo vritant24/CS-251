@@ -24,3 +24,6 @@
 2016-11-09 15:41:24,525 [Worker-1] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
 2016-11-09 15:41:26,479 [Worker-2] WARN  org.eclipse.jgit.util.FS - Exception caught during execution of command '[git, config, --system, --edit]' in '/usr/bin', return code '128', error message 'fatal: Could not switch to '/Applications/Xcode.app/Contents/Developer/usr/etc/': No such file or directory
 '
+2016-11-14 15:08:23,194 [Worker-3] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2016-11-14 15:08:25,221 [Worker-5] WARN  org.eclipse.jgit.util.FS - Exception caught during execution of command '[git, config, --system, --edit]' in '/usr/bin', return code '128', error message 'fatal: Could not switch to '/Applications/Xcode.app/Contents/Developer/usr/etc/': No such file or directory
+'

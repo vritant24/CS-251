@@ -138,12 +138,13 @@ public class SearchTree {
 	 * @return node with minimum jobs and at least free space size
 	 */
 	public Node findMinJobNode(Node node, int size) {
+		
+		if(node == null) {
+			return null;
+		}
+		
 		//if current node's size isn't enough, go right
 		if(node.free < size) {
-			//if no right path exists, return null
-			if(node.right == null) {
-				return null;
-			}
 			return findMinJobNode(node.right, size);
 		}
 		
@@ -157,13 +158,26 @@ public class SearchTree {
 		// if node has a right child, find machine with minimum jobs on right side
 		if(node.right != null) {
 			if(node.right.minJobsNode.numjobs <= node.numjobs) {
+				
+				//Break Tie
 				if(node.right.minJobsNode.numjobs == node.numjobs) {
-					if(node.right.minJobsNode.id < node.id) {
-						bestOption = node.minJobsNode;
+					if(node.right.minJobsNode.free <= node.free) {
+						
+						if(node.right.minJobsNode.free == node.free) {
+							if(node.right.minJobsNode.id < node.id) {
+								bestOption = node.right.minJobsNode;
+							}
+						}
+						else {
+							bestOption = node.right.minJobsNode;
+						}
+					}
+					else {
+						bestOption = node.right.minJobsNode;
 					}
 				}
 				else {
-					bestOption = node.minJobsNode;
+					bestOption = node.right.minJobsNode;
 				}
 			}
 			

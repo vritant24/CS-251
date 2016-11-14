@@ -2517,3 +2517,17 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2016-11-09 15:41:26.494
 !MESSAGE Exception caught during execution of command '[git, config, --system, --edit]' in '/usr/bin', return code '128', error message 'fatal: Could not switch to '/Applications/Xcode.app/Contents/Developer/usr/etc/': No such file or directory
 '
+!SESSION 2016-11-14 15:04:04.505 -----------------------------------------------
+eclipse.buildId=4.6.1.M20160907-1200
+java.version=1.8.0_45
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/Luffy/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/Luffy/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2016-11-14 15:08:13.846
+!MESSAGE System property http.nonProxyHosts has been set to www.bookmyshow.com|*.www.bookmyshow.com|ask.fm|*.ask.fm|www.facebook.com|*.www.facebook.com by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2016-11-14 15:08:25.226
+!MESSAGE Exception caught during execution of command '[git, config, --system, --edit]' in '/usr/bin', return code '128', error message 'fatal: Could not switch to '/Applications/Xcode.app/Contents/Developer/usr/etc/': No such file or directory
+'
