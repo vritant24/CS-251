@@ -54,8 +54,7 @@ public class SearchTree {
 		Node tracker = root; // goes through the search tree to find machine
 		Node bestOption = tracker; // stores best option
 		
-		int flag = 0; // tracks if it has gone to the right side of the 
-		
+		int flag = 0;
 		while(true) {
 			//check if current node holds same free space as size
 			if(tracker.free ==  size) {
@@ -160,23 +159,27 @@ public class SearchTree {
 		if(node.right != null) {
 			Node minRight = node.right.minJobsNode;
 			
-			if(minRight.numjobs < node.numjobs) {
-
-				bestOption = minRight;
-
-			}
-			else if(minRight.numjobs == node.numjobs) {			//Break Tie
+			if(minRight.numjobs <= node.numjobs) {
 				
-				if(minRight.free <= node.free) {
-					
-					if(minRight.free == node.free) {
-						if(minRight.id < node.id) {
+				//Break Tie
+				if(minRight.numjobs == node.numjobs) {
+					if(minRight.free <= node.free) {
+						
+						if(minRight.free == node.free) {
+							if(minRight.id < node.id) {
+								bestOption = minRight;
+							}
+						}
+						else {
 							bestOption = minRight;
 						}
 					}
 					else {
 						bestOption = minRight;
 					}
+				}
+				else {
+					bestOption = minRight;
 				}
 			}
 			

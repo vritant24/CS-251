@@ -160,23 +160,28 @@ public class SearchTree {
 		if(node.right != null) {
 			Node minRight = node.right.minJobsNode;
 			
-			if(minRight.numjobs < node.numjobs) {
-
-				bestOption = minRight;
-
-			}
-			else if(minRight.numjobs == node.numjobs) {			//Break Tie
+			if(minRight.numjobs <= node.numjobs) {
 				
-				if(minRight.free <= node.free) {
+				//Break Tie
+				if(minRight.numjobs == node.numjobs) {
 					
-					if(minRight.free == node.free) {
-						if(minRight.id < node.id) {
+					if(minRight.free <= node.free) {
+						
+						if(minRight.free == node.free) {
+							if(minRight.id < node.id) {
+								bestOption = minRight;
+							}
+						}
+						else {
 							bestOption = minRight;
 						}
 					}
 					else {
 						bestOption = minRight;
 					}
+				}
+				else {
+					bestOption = minRight;
 				}
 			}
 			

@@ -161,11 +161,11 @@ public class SearchTree {
 			Node minRight = node.right.minJobsNode;
 			
 			if(minRight.numjobs < node.numjobs) {
-
-				bestOption = minRight;
-
+				else {
+					bestOption = minRight;
+				}
 			}
-			else if(minRight.numjobs == node.numjobs) {			//Break Tie
+			else if(minRight.numjobs == node.numjobs) {
 				
 				if(minRight.free <= node.free) {
 					
@@ -177,6 +177,9 @@ public class SearchTree {
 					else {
 						bestOption = minRight;
 					}
+				}
+				else {
+					bestOption = minRight;
 				}
 			}
 			
