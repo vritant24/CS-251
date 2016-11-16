@@ -85,12 +85,12 @@ public class SearchTree {
 			//bestOption = tracker;
 		}
 		
-		//System.out.println("size before - " + bestOption.free + " size added - " + size);
+		System.out.println("size before - " + bestOption.free + " size added - " + size);
 		
 		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added
 		
-		//System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
-		//System.out.println();
+		System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
+		System.out.println();
 		
 		root = RedBlackBST.delete(root, bestOption); // delete machine in which job was added
 		root = RedBlackBST.insert(root, m); // add updated machine to tree
@@ -117,7 +117,9 @@ public class SearchTree {
 		
 		Node toUse = findMinJobNode(root, size);
 		System.out.println("size before - " + toUse.free + " size added - " + size + " numjobs - " + toUse.numjobs);
-
+		if(toUse == null) {
+			System.out.println("null");
+		}
 		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
 		
 		System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
@@ -297,11 +299,11 @@ public class SearchTree {
 		int len = loads.size();
 
 		Collections.sort(loads);
-		if (len%2 != 0) {
+		if (size%2 == 0) {
 			medianload = loads.get(len/2);
 		}
 		else {
-			medianload = (loads.get(len/2) + loads.get(len/2-1))/2.0;
+			medianload = (loads.get(len/2) + loads.get(len/2+1))/2;
 		}
 		System.out.println(size);
 		ideal = size/(double)numOfMachine;

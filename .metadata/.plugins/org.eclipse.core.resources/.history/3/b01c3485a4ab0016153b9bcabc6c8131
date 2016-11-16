@@ -297,11 +297,11 @@ public class SearchTree {
 		int len = loads.size();
 
 		Collections.sort(loads);
-		if (len%2 != 0) {
+		if (size%2 == 0) {
 			medianload = loads.get(len/2);
 		}
 		else {
-			medianload = (loads.get(len/2) + loads.get(len/2-1))/2.0;
+			medianload = (loads.get(len/2) + loads.get(len/2+1))/2;
 		}
 		System.out.println(size);
 		ideal = size/(double)numOfMachine;
