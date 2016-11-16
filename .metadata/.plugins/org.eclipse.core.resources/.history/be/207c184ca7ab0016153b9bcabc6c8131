@@ -226,8 +226,7 @@ public class SearchTree {
 		Node newM = new Node(m.id, m.free + size, m.numjobs - 1); // the machine after removing the job
 		
 		jobs.deleteJob(jobid, m); // delete job with jobid from jobs
-		jobs.addJob(-1, 0, newM);
-		jobs.deleteJob(-1, newM);
+		
 		//update machine in tree
 		root = RedBlackBST.delete(root, m);
 		root = RedBlackBST.insert(root, newM);
