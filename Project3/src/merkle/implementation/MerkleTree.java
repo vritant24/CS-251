@@ -13,7 +13,7 @@ import static merkle.Configuration.hashFunction;
  * TODO: IMPLEMENT build
  *
  * @author John Doe
- * @pso 1729
+ * @pso 17
  * @date 10-23-2016
  */
 public class MerkleTree extends IMerkleTree {

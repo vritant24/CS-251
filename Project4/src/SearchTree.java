@@ -1,5 +1,9 @@
 /*Search Tree class
  * Your implementation goes in this file
+ * 
+ * @author Vritant Bhardwaj (bhardwav)
+ * @pso 17
+ * @date 11-18-2016
  */
 import java.util.*;
 
@@ -33,7 +37,6 @@ public class SearchTree {
 	public SearchTree(JobTable jt) {
 		jobs = jt;
 	}
-	
 
 
 	//Find the machine with just enough free space to schedule a job
@@ -62,7 +65,7 @@ public class SearchTree {
 				bestOption = tracker;
 				break;
 			}
-			//check if current node can hold job, if it can, see if it has lesser memory that bestOption
+			//check if current node can hold job, if it can, see if it has lesser memory than bestOption
 			if(tracker.free > size) {
 				flag = 1;
 				if(tracker.free < bestOption.free) {
@@ -115,16 +118,19 @@ public class SearchTree {
 			return -1;
 		}
 		
-		Node toUse = findMinJobNode(root, size);
-		System.out.println("size before - " + toUse.free + " size added - " + size + " numjobs - " + toUse.numjobs);
+		Node toUse = findMinJobNode(root, size); // finds node with minimum jobs.
+		//System.out.println("size before - " + toUse.free + " size added - " + size + " numjobs - " + toUse.numjobs);
 
 		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
 		
-		System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
-		System.out.println();
-		root = RedBlackBST.delete(root, toUse);
+		//System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
+		//System.out.println();
+		
+		//update machine in root
+		root = RedBlackBST.delete(root, toUse);  
 		root = RedBlackBST.insert(root, m);
 		
+		//add job to jobtable
 		jobs.addJob(jobid, size, m);
 		/* Do not modify the following part */
 		machineLoads[m.id] ++;
@@ -219,15 +225,18 @@ public class SearchTree {
 			return;
 		}
 		
-		System.out.println("deleted job - " + jobid + " machine - " + m.id);
+		//System.out.println("deleted job - " + jobid + " machine - " + m.id);
 		
 		int size = jobs.jobSize(jobid); // the amount of memory that the job takes
 		
 		Node newM = new Node(m.id, m.free + size, m.numjobs - 1); // the machine after removing the job
 		
 		jobs.deleteJob(jobid, m); // delete job with jobid from jobs
+		
+		//update machine space in jobtable
 		jobs.addJob(-1, 0, newM);
 		jobs.deleteJob(-1, newM);
+		
 		//update machine in tree
 		root = RedBlackBST.delete(root, m);
 		root = RedBlackBST.insert(root, newM);
