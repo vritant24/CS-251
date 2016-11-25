@@ -88,12 +88,12 @@ public class SearchTree {
 			//bestOption = tracker;
 		}
 		
-		System.out.println("size before - " + bestOption.free + " size added - " + size);
+		//System.out.println("size before - " + bestOption.free + " size added - " + size);
 		
 		m = new Node(bestOption.id, bestOption.free - size, bestOption.numjobs + 1); // create new node to update machine in which job will be added
 		
-		System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
-		System.out.println();
+		//System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
+		//System.out.println();
 		
 		root = RedBlackBST.delete(root, bestOption); // delete machine in which job was added
 		root = RedBlackBST.insert(root, m); // add updated machine to tree
@@ -119,12 +119,12 @@ public class SearchTree {
 		}
 		
 		Node toUse = findMinJobNode(root, size); // finds node with minimum jobs.
-		System.out.println("size before - " + toUse.free + " size added - " + size + " numjobs - " + toUse.numjobs);
+		//System.out.println("size before - " + toUse.free + " size added - " + size + " numjobs - " + toUse.numjobs);
 
 		m = new Node(toUse.id, toUse.free - size, toUse.numjobs + 1);
 		
-		System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
-		System.out.println();
+		//System.out.println("node added - " + m.id + " space left - " + m.free + " jobid - " + jobid);
+		//System.out.println();
 		
 		//update machine in root
 		root = RedBlackBST.delete(root, toUse);  
