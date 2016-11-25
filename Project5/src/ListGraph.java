@@ -43,15 +43,22 @@ public class ListGraph extends Graph
 
 	public void addEdge(int u, int v)
 	{
+			adjLists[u].add(v);
 	}
 
 	public boolean hasEdge(int u, int v)
 	{
+		if(adjLists[u].contains(v)) {
+			return true;
+		}
 		return false;
 	}
 
 	public void removeEdge(int u, int v)
 	{
+		if(hasEdge(u, v)) {
+			adjLists[u].remove(v);
+		}
 	}
 
 
