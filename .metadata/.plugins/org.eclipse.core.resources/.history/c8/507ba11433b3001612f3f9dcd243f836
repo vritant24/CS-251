@@ -35,40 +35,19 @@ public class MatrixGraph extends Graph
 
 	public void addEdge(int u, int v)
 	{
-		adjMatrix[u][v] = 1;
 	}
 
 	public boolean hasEdge(int u, int v)
 	{
-		if(adjMatrix[u][v] == 1) {
-			return true;
-		}
 		return false;
 	}
 
 	public void removeEdge(int u, int v)
 	{
-		adjMatrix[u][v] = 0;
 	}
 
 	LinkedList<Integer> getAdjacentVertices(int v) {
-		LinkedList<Integer> temp = new LinkedList<>();
-		
-		for(int i = 0; i < adjMatrix.length; i++) {
-			if(adjMatrix[i][v] == 1) {
-				temp.add(i);
-			}
-		}
-		
-		for(int i = 0; i < adjMatrix[0].length; i++) {
-			if(adjMatrix[v][i] == 1) {
-				if(!temp.contains(i)) {
-					temp.add(i);
-				}
-			}
-		}
-		
-		return temp;
+		return new LinkedList<Integer>();
 	}
 
 }

@@ -59,16 +59,7 @@ public class MatrixGraph extends Graph
 				temp.add(i);
 			}
 		}
-		
-		for(int i = 0; i < adjMatrix[0].length; i++) {
-			if(adjMatrix[v][i] == 1) {
-				if(!temp.contains(i)) {
-					temp.add(i);
-				}
-			}
-		}
-		
-		return temp;
+		return new LinkedList<Integer>();
 	}
 
 }

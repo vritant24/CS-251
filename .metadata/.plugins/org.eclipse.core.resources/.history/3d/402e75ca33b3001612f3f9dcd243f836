@@ -60,7 +60,7 @@ public class MatrixGraph extends Graph
 			}
 		}
 		
-		for(int i = 0; i < adjMatrix[0].length; i++) {
+		for(int i = 0; i < adjMatrix[].length; i++) {
 			if(adjMatrix[v][i] == 1) {
 				if(!temp.contains(i)) {
 					temp.add(i);
@@ -68,7 +68,7 @@ public class MatrixGraph extends Graph
 			}
 		}
 		
-		return temp;
+		return new LinkedList<Integer>();
 	}
 
 }

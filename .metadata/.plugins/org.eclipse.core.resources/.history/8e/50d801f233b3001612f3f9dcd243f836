@@ -68,7 +68,7 @@ public class MatrixGraph extends Graph
 			}
 		}
 		
-		return temp;
+		return new LinkedList<Integer>();
 	}
 
 }
