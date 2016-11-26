@@ -19,7 +19,7 @@ public class Part1 {
 	// Find the median degree of all vertices in G
 	public double medianDegree(Graph G)
 	{	
-		double[] track = new double[G.getNumVertices()];
+		int[] track = new int[G.getNumVertices()];
 		
 		int counter;
 		for(int i = 0; i < G.getNumVertices(); i++) {
@@ -36,12 +36,7 @@ public class Part1 {
 		}
 		
 		Arrays.sort(track);
-		if(track.length % 2 == 1) {
-			return track[track.length / 2];
-		}
-		else {
-			return ((track[track.length / 2] + track[(track.length / 2) + 1]) / 2);
-		}
+		return 0.0;
 	}
 	
 	

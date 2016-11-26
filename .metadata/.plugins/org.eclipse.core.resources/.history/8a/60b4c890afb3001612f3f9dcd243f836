@@ -37,11 +37,9 @@ public class Part1 {
 		
 		Arrays.sort(track);
 		if(track.length % 2 == 1) {
-			return track[track.length / 2];
+			return 
 		}
-		else {
-			return ((track[track.length / 2] + track[(track.length / 2) + 1]) / 2);
-		}
+		return 0.0;
 	}
 	
 	

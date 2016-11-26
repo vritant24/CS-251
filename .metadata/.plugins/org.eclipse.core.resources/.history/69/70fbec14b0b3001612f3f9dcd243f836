@@ -42,6 +42,7 @@ public class Part1 {
 		else {
 			return ((track[track.length / 2] + track[(track.length / 2) + 1]) / 2);
 		}
+		return 0.0;
 	}
 	
 	
