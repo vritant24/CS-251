@@ -60,23 +60,7 @@ public class Part1 {
 	// Returns false otherwise
 	public boolean is5Clique(Graph G, LinkedList<Integer> vertices)
 	{
-		int length = vertices.size();
-		
-		for(int i = 0; i < length - 1; i++) {
-			for(int j = i + 1; j < length; j++) {
-				if( i == j) {
-					return false;
-				}
-			}
-		}
-		int numEdges = (length * (length - 3) / 2 + length); //number of edges in a polygon
-		int counter;
-		
-		for(int i = 0; i < length; i++) {
-			for(int j = i + 1; j < length; j++) {
-				
-			}
-		}
+		int numEdges = vertices.size() * (vertices.size() - 3) / 2 + vertices.size(); //number of edges in a polygon
 		return false;
 	}
 	
