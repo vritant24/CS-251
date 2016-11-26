@@ -72,18 +72,17 @@ public class Part1 {
 			array[i] = vertices.removeLast();
 		}
 		
+		//check if there are distinct vertices and if vertex has all needed edges
 		for(int i = 0; i < length; i++) {
 			for(int j = 0; j < length; j++) {
 				if(i == j) {
 					continue;
 				}
 				
-				//check for distinct vertices
 				if(array[i] == array[j]) {
 					return false;
 				}
 				
-				//check if a vertex has all needed edges
 				if(!G.hasEdge(array[i], array[j])) {
 					return false;
 				}

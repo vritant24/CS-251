@@ -62,34 +62,26 @@ public class Part1 {
 	{
 		int length = vertices.size();
 		
-		//check if there are 5 vertices
 		if(length != 5) {
 			return false;
 		}
 		
-		int[] array = new int[5];
-		for(int i = 0; i < 5; i++) {
-			array[i] = vertices.removeLast();
-		}
-		
-		for(int i = 0; i < length; i++) {
-			for(int j = 0; j < length; j++) {
-				if(i == j) {
-					continue;
-				}
-				
-				//check for distinct vertices
-				if(array[i] == array[j]) {
-					return false;
-				}
-				
-				//check if a vertex has all needed edges
-				if(!G.hasEdge(array[i], array[j])) {
+		for(int i = 0; i < length - 1; i++) {
+			for(int j = i + 1; j < length; j++) {
+				if( i == j) {
 					return false;
 				}
 			}
 		}
-		return true;
+		int numEdges = (length * (length - 3) / 2 + length); //number of edges in a polygon
+		int counter;
+		
+		for(int i = 0; i < length; i++) {
+			for(int j = i + 1; j < length; j++) {
+				
+			}
+		}
+		return false;
 	}
 	
 	
