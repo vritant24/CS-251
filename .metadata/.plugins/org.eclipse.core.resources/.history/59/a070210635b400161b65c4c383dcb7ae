@@ -132,6 +132,6 @@ public class Part1 {
 			}
 		}
 		
-		return list;
+		return new list;
 	}
 }

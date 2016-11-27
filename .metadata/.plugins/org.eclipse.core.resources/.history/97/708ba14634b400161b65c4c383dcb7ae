@@ -119,19 +119,15 @@ public class Part1 {
 	// Return an empty list otherwise
 	public LinkedList<Integer> has6Degree6(Graph G)
 	{
-		int length = G.getNumVertices();
 		LinkedList<Integer> list = new LinkedList<>();
+		int temp;
 		
-		if(length < 6) {
-			return list;
-		}
-		
-		for(int i = 0; i < length; i++) {
+		for(int i = 0; i < G.getNumVertices(); i++) {
 			if(getDegree(G, i) >= 6) {
 				list.add(i);
 			}
 		}
 		
-		return list;
+		return new LinkedList<Integer>();
 	}
 }
