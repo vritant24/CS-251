@@ -64,12 +64,7 @@ public class ListGraph extends Graph
 
 	LinkedList<Integer> getAdjacentVertices(int v) {
 		LinkedList<Integer> temp = new LinkedList<>();
-		
-		for(int i = 0; i < adjLists.length; i++) {
-			if(adjLists[i].contains(v)) {
-				temp.add(i);
-			}
-		}
+		temp.addAll(adjLists[v]);
 		return temp;
 	}
 

@@ -119,7 +119,7 @@ public class Part1 {
 		double compare = Math.sqrt(length);
 		
 		for(int i = 0; i < length; i++) {
-			if(getDegree(G, i) >= compare) {
+			if(getDegree(G, i) >= ) {
 				list.add(i);
 				if (list.size() == 6) {
 					break;

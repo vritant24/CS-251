@@ -109,29 +109,7 @@ public class Part1 {
 	// Return an empty list otherwise
 	public LinkedList<Integer> has6DegreeRootN(Graph G)
 	{
-		int length = G.getNumVertices();
-		LinkedList<Integer> list = new LinkedList<>();
-		
-		if(length < 6) {
-			return list;
-		}
-		
-		double compare = Math.sqrt(length);
-		
-		for(int i = 0; i < length; i++) {
-			if(getDegree(G, i) >= compare) {
-				list.add(i);
-				if (list.size() == 6) {
-					break;
-				}
-			}
-		}
-		
-		if(list.size() < 6) {
-			list = new LinkedList<>();
-		}
-		
-		return list;
+		return new LinkedList<Integer>();
 	}
 	
 	
@@ -149,11 +127,8 @@ public class Part1 {
 		}
 		
 		for(int i = 0; i < length; i++) {
-			if(getDegree(G, i) < 6) {
+			if(getDegree(G, i) >= 6) {
 				list.add(i);
-				if (list.size() == 6) {
-					break;
-				}
 			}
 		}
 		

@@ -54,9 +54,17 @@ public class MatrixGraph extends Graph
 	LinkedList<Integer> getAdjacentVertices(int v) {
 		LinkedList<Integer> temp = new LinkedList<>();
 		
+		for(int i = 0; i < adjMatrix.length; i++) {
+			if(adjMatrix[i][v] == 1) {
+				temp.add(i);
+			}
+		}
+		
 		for(int i = 0; i < adjMatrix[0].length; i++) {
 			if(adjMatrix[v][i] == 1) {
+				if(!temp.contains(i)) {
 					temp.add(i);
+				}
 			}
 		}
 		
