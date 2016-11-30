@@ -43,17 +43,16 @@ public class Part1 {
 	 * @return degree of vertex
 	 */
 	public int getDegree(Graph G, int vertex) {
-//		int counter = 0;
-//		for(int j = 0; j < G.numVertices; j++) {
-//			if(vertex == j) {
-//				continue;
-//			}
-//			if(G.hasEdge(vertex, j)) {
-//				counter++;
-//			}
-//		}
-//		return counter;
-		return G.getAdjacentVertices(vertex).size();
+		int counter = 0;
+		for(int j = 0; j < G.numVertices; j++) {
+			if(vertex == j) {
+				continue;
+			}
+			if(G.hasEdge(vertex, j)) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 
 	// TODO:

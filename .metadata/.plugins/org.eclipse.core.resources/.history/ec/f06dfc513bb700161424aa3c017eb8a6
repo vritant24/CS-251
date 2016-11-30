@@ -23,6 +23,7 @@ public class Part1 {
 		//Add degrees of each vertex into track
 		for(int i = 0; i < G.getNumVertices(); i++) {
 			track[i] = (double) getDegree(G, i);
+			System.out.println(track[i]);
 		}
 
 		//find median
@@ -31,7 +32,7 @@ public class Part1 {
 			return track[track.length / 2];
 		}
 		else {
-			return ((track[track.length / 2] + track[(track.length / 2) - 1]) / 2.0);
+			return ((track[track.length / 2] + track[(track.length / 2) + 1.0]) / 2.0);
 		}
 	}
 
@@ -43,17 +44,16 @@ public class Part1 {
 	 * @return degree of vertex
 	 */
 	public int getDegree(Graph G, int vertex) {
-//		int counter = 0;
-//		for(int j = 0; j < G.numVertices; j++) {
-//			if(vertex == j) {
-//				continue;
-//			}
-//			if(G.hasEdge(vertex, j)) {
-//				counter++;
-//			}
-//		}
-//		return counter;
-		return G.getAdjacentVertices(vertex).size();
+		int counter = 0;
+		for(int j = 0; j < G.numVertices; j++) {
+			if(vertex == j) {
+				continue;
+			}
+			if(G.hasEdge(vertex, j)) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 
 	// TODO:

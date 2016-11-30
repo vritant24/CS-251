@@ -31,7 +31,7 @@ public class Part1 {
 			return track[track.length / 2];
 		}
 		else {
-			return ((track[track.length / 2] + track[(track.length / 2) - 1]) / 2.0);
+			return ((track[track.length / 2] + track[(track.length / 2) + 1]) / 2);
 		}
 	}
 
@@ -43,17 +43,16 @@ public class Part1 {
 	 * @return degree of vertex
 	 */
 	public int getDegree(Graph G, int vertex) {
-//		int counter = 0;
-//		for(int j = 0; j < G.numVertices; j++) {
-//			if(vertex == j) {
-//				continue;
-//			}
-//			if(G.hasEdge(vertex, j)) {
-//				counter++;
-//			}
-//		}
-//		return counter;
-		return G.getAdjacentVertices(vertex).size();
+		int counter = 0;
+		for(int j = 0; j < G.numVertices; j++) {
+			if(vertex == j) {
+				continue;
+			}
+			if(G.hasEdge(vertex, j)) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 
 	// TODO:
@@ -61,16 +60,6 @@ public class Part1 {
 	// If it does, return a linked list contining the vertices in the giant connected component
 	// Returns an empty list if there is no giant connected component
 	public LinkedList<Integer> hasGiantConnectedComponent(Graph G)
-	{
-		return null;
-	}
-
-
-
-	// TODO:
-	// Returns true if the given 5 vertices in the list form a clique
-	// Returns false otherwise
-	public boolean is5Clique(Graph G, LinkedList<Integer> vertices)
 	{
 		int length = vertices.size();
 
@@ -102,6 +91,16 @@ public class Part1 {
 			}
 		}
 		return true;
+	}
+
+
+
+	// TODO:
+	// Returns true if the given 5 vertices in the list form a clique
+	// Returns false otherwise
+	public boolean is5Clique(Graph G, LinkedList<Integer> vertices)
+	{
+		return false;
 	}
 
 
