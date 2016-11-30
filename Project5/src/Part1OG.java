@@ -2,8 +2,9 @@ import java.util.*;
 import java.lang.*;
 
 /*		Part 1
- *
+ * 
  * 		TODO: Implement the following method stubs
+ * 		You must submit this file
  *
  * 		medianDegree
  * 		hasGiantConnectedComponent
@@ -11,20 +12,20 @@ import java.lang.*;
  * 		has6DegreeRootN
  * 		has6Degree6
  */
-public class Part1 {
+public class Part1OG {
 
 
 	// TODO:
 	// Find the median degree of all vertices in G
 	public double medianDegree(Graph G)
-	{
+	{	
 		double[] track = new double[G.getNumVertices()]; // tracks degrees of each vertex
-
+		
 		//Add degrees of each vertex into track
 		for(int i = 0; i < G.getNumVertices(); i++) {
 			track[i] = (double) getDegree(G, i);
 		}
-
+		
 		//find median
 		Arrays.sort(track);
 		if(track.length % 2 == 1) {
@@ -34,8 +35,7 @@ public class Part1 {
 			return ((track[track.length / 2] + track[(track.length / 2) + 1]) / 2);
 		}
 	}
-
-
+	
 	/**
 	 * Finds degree of given vertex
 	 * @param G
@@ -54,36 +54,45 @@ public class Part1 {
 		}
 		return counter;
 	}
-
+	
 	// TODO:
-	// Determines if G has a connected component of size greater than or equal to ceil(n/2)
-	// If it does, return a linked list contining the vertices in the giant connected component
-	// Returns an empty list if there is no giant connected component
+	// Returns true if G has a connected component of size greater than n/2
+	// Returns false otherwise
 	public LinkedList<Integer> hasGiantConnectedComponent(Graph G)
 	{
+		return new LinkedList<Integer>();
+	}
+	
+	
+	
+	// TODO:
+	// Returns true if the given 5 vertices in the list form a clique
+	// Returns false otherwise
+	public boolean is5Clique(Graph G, LinkedList<Integer> vertices)
+	{
 		int length = vertices.size();
-
+		
 		//check if there are 5 vertices
 		if(length != 5) {
 			return false;
 		}
-
+		
 		int[] array = new int[5];
 		for(int i = 0; i < 5; i++) {
 			array[i] = vertices.removeLast();
 		}
-
+		
 		for(int i = 0; i < length; i++) {
 			for(int j = 0; j < length; j++) {
 				if(i == j) {
 					continue;
 				}
-
+				
 				//check for distinct vertices
 				if(array[i] == array[j]) {
 					return false;
 				}
-
+				
 				//check if a vertex has all needed edges
 				if(!G.hasEdge(array[i], array[j])) {
 					return false;
@@ -92,36 +101,23 @@ public class Part1 {
 		}
 		return true;
 	}
-
-
-
+	
+	
+	
 	// TODO:
-	// Returns true if the given 5 vertices in the list form a clique
-	// Returns false otherwise
-	public boolean is5Clique(Graph G, LinkedList<Integer> vertices)
-	{
-		return false;
-	}
-
-
-
-	// TODO:
-	// Determines if the given graph has at least 6 vertices of degree
-	// greater than or equal to floor(sqrt(n))
-	// If so, return a linked list containing 6 vertices of degree greater than or equal to
-	// floor(sqrt(n))
-	// Return an empty list if there are not at least 6 vertices with the required degree
+	// If the given graph has at least 6 vertices of degree sqrt(n) returns 6 such vertices
+	// Return an empty list otherwise
 	public LinkedList<Integer> has6DegreeRootN(Graph G)
 	{
 		int length = G.getNumVertices();
 		LinkedList<Integer> list = new LinkedList<>();
-
+		
 		if(length < 6) {
 			return list;
 		}
-
+		
 		double compare = Math.sqrt(length);
-
+		
 		for(int i = 0; i < length; i++) {
 			if(getDegree(G, i) >= compare) {
 				list.add(i);
@@ -130,29 +126,28 @@ public class Part1 {
 				}
 			}
 		}
-
+		
 		if(list.size() < 6) {
 			list = new LinkedList<>();
 		}
-
+		
 		return list;
 	}
-
-
-
+	
+	
+	
 	// TODO:
-	// Determines if the graph has at least 6 vertices of degree less than 6
-	// If so, return a linked list containing 6 vertices that satisfy the condition
-	// If not, return an empty linked list.
+	// If the given graph has at least 6 vertices of degree 6 returns 6 such vertices
+	// Return an empty list otherwise
 	public LinkedList<Integer> has6Degree6(Graph G)
 	{
 		int length = G.getNumVertices();
 		LinkedList<Integer> list = new LinkedList<>();
-
+		
 		if(length < 6) {
 			return list;
 		}
-
+		
 		for(int i = 0; i < length; i++) {
 			if(getDegree(G, i) < 6) {
 				list.add(i);
@@ -161,11 +156,11 @@ public class Part1 {
 				}
 			}
 		}
-
+		
 		if(list.size() < 6) {
 			list = new LinkedList<>();
 		}
-
+		
 		return list;
 	}
 }
