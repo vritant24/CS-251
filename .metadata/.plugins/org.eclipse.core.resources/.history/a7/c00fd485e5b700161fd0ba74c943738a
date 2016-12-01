@@ -85,10 +85,8 @@ public class Part1 {
 		pass.add(vertex);
 		pass.addAll(list);
 		
-		LinkedList<Integer> bestOption = pass;
-		
 		Iterator<Integer> iterator = temp.iterator();
-		
+		LinkedList<Integer> bestOption = pass;
 		
 		while(iterator.hasNext()) {
 			int next = iterator.next();

@@ -75,22 +75,19 @@ public class Part1 {
 
 	public LinkedList<Integer> findGCC(Graph G, int vertex, LinkedList<Integer> list) {
 		
-		if(list.size() >= nByTwo) {
-			return list;
-		}
-		
 		LinkedList<Integer> temp = G.getAdjacentVertices(vertex);
+		LinkedList<Integer> bestOption = list;
 		
 		LinkedList<Integer> pass = new LinkedList<>();
-		pass.add(vertex);
+		pass.add(-1);
 		pass.addAll(list);
-		
-		LinkedList<Integer> bestOption = pass;
+		pass.remove(-1);
+		System.out.println(" list - " + list.toString());
 		
 		Iterator<Integer> iterator = temp.iterator();
-		
-		
+		pass.add(vertex);;
 		while(iterator.hasNext()) {
+			System.out.println("vertex - " + vertex + " pass - " + pass.toString());
 			int next = iterator.next();
 			if(pass.contains(next)) {
 				continue;
@@ -99,7 +96,6 @@ public class Part1 {
 			LinkedList<Integer> result = findGCC(G, next, pass); 
 			
 			if(result.size() >= nByTwo) {
-				bestOption = result;
 				break;
 			}
 			

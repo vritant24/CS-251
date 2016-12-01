@@ -82,13 +82,13 @@ public class Part1 {
 		LinkedList<Integer> temp = G.getAdjacentVertices(vertex);
 		
 		LinkedList<Integer> pass = new LinkedList<>();
-		pass.add(vertex);
+		pass.add(-1);
 		pass.addAll(list);
-		
-		LinkedList<Integer> bestOption = pass;
+		pass.remove(-1);
 		
 		Iterator<Integer> iterator = temp.iterator();
-		
+		pass.add(vertex);
+		LinkedList<Integer> bestOption = pass;
 		
 		while(iterator.hasNext()) {
 			int next = iterator.next();
