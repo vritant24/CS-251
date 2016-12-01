@@ -1,6 +1,7 @@
 /*		Part 2
  * 
  * 		TODO: Implement the following methods
+ *		You must submit this file
  *              
  *      maxInDegree
  *      maxOutDegree
@@ -13,9 +14,10 @@
  */
 public class Part2 {
 	
+	public int visited[];
 
 	// TODO:
-	// Returns the maximum in-degree in the graph G
+	// Returns the maximum in degree in the graph G
 	public int maxInDegree(Graph G)
 	{
 		return 0;
@@ -33,9 +35,8 @@ public class Part2 {
 	
 	
 	// TODO:
-	// Determines if a graph has only one cycle
-	// Returns a linked list containing the vertices in the cycle if there was only one cycle
-	// Returns an empty linked list if there are none or more than one cycle
+	// Returns true if the graph has only one cycle
+	// Returns false otherwise
 	public LinkedList<Integer> hasOneCycle(Graph G)
 	{
 		return new LinkedList<Integer>();
@@ -60,8 +61,7 @@ public class Part2 {
 	
 	// TODO:
 	// Returns the vertex clustering coefficient of v
-	// The vertex clustering coefficient is the fraction of pairs of vertices
-	// that are adjacent to v that are also adjacent to each other.
+	// See handout for more detailed instructions
 	public double vertexClusterCoeff(Graph G, int v)
 	{
 		return 0.0;

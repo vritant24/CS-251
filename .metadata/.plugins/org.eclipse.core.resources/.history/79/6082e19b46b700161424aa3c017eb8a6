@@ -65,13 +65,7 @@ public class Part1 {
 		return null;
 	}
 
-	public LinkedList<Integer> findGCC(Graph G, int vertex, int size) {
-		LinkedList<Integer> list = new LinkedList<>();
-		
-		
-		
-		return null;
-	}
+
 
 	// TODO:
 	// Returns true if the given 5 vertices in the list form a clique
@@ -84,7 +78,7 @@ public class Part1 {
 		if(length != 5) {
 			return false;
 		}
-		
+
 		int[] array = new int[5];
 		for(int i = 0; i < 5; i++) {
 			array[i] = vertices.removeLast();
