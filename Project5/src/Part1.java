@@ -1,5 +1,4 @@
 import java.util.*;
-import java.lang.*;
 
 /*		Part 1
  *
@@ -12,7 +11,7 @@ import java.lang.*;
  * 		has6Degree6
  */
 public class Part1 {
-
+	double nByTwo;
 
 	// TODO:
 	// Find the median degree of all vertices in G
@@ -62,15 +61,50 @@ public class Part1 {
 	// Returns an empty list if there is no giant connected component
 	public LinkedList<Integer> hasGiantConnectedComponent(Graph G)
 	{
-		return null;
+		nByTwo = Math.ceil( ((double)G.getNumVertices()) / 2.0 );
+		LinkedList<Integer> temp;
+		
+		for(int i = 0; i < G.getNumVertices(); i++) {
+			temp = findGCC(G, i, new LinkedList<Integer>());
+			if(temp.size() >= nByTwo) {
+				return temp;
+			}
+		}
+		return new LinkedList<Integer>();
 	}
 
-	public LinkedList<Integer> findGCC(Graph G, int vertex, int size) {
-		LinkedList<Integer> list = new LinkedList<>();
+	public LinkedList<Integer> findGCC(Graph G, int vertex, LinkedList<Integer> list) {
 		
+		LinkedList<Integer> temp = G.getAdjacentVertices(vertex);
+		LinkedList<Integer> bestOption = list;
 		
+		LinkedList<Integer> pass = new LinkedList<>();
+		pass.add(-1);
+		pass.addAll(list);
+		pass.remove(-1);
+		System.out.println(" list - " + list.toString());
 		
-		return null;
+		Iterator<Integer> iterator = temp.iterator();
+		pass.add(vertex);;
+		while(iterator.hasNext()) {
+			System.out.println("vertex - " + vertex + " pass - " + pass.toString());
+			int next = iterator.next();
+			if(pass.contains(next)) {
+				continue;
+			}
+			
+			LinkedList<Integer> result = findGCC(G, next, pass); 
+			
+			if(result.size() > nByTwo) {
+				break;
+			}
+			
+			if(result.size() > bestOption.size()) {
+				bestOption = result;
+			}
+		}
+		
+		return bestOption;
 	}
 
 	// TODO:
