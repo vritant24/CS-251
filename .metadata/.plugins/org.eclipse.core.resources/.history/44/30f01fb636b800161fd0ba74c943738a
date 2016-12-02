@@ -145,7 +145,7 @@ public class LinkedList<Item> implements Iterable<Item> {
 		Node it = first;
 		while(it != null)
 		{
-			if(it.item.equals(item))
+			if(it.item == item)
 				return true;
 			it = it.next;
 		}
