@@ -82,6 +82,7 @@ public class Part2 {
 	{
 		LinkedList<Integer> listU = G.getAdjacentVertices(u);
 		LinkedList<Integer> listV = G.getAdjacentVertices(v);
+		
 		if(!listU.contains(v)) {
 			return 0;
 		}
@@ -107,16 +108,14 @@ public class Part2 {
 		}
 		
 		LinkedList<Integer> temp;
-		boolean hasU;
-		boolean hasV;
 		for(int i = 0; i < length; i++) {
 			if (array[i]) {
 				continue;
 			}
 			
 			temp = G.getAdjacentVertices(i);
-			hasU = temp.contains(u);
-			hasV = temp.contains(v);
+			boolean hasU = temp.contains(u);
+			boolean hasV = temp.contains(v);
 			
 			if(hasU && hasV) {
 				counter++;

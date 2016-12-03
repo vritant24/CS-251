@@ -80,60 +80,14 @@ public class Part2 {
 	// Returns the total number of triangles in the entire graph G that contain the edge (u,v)
 	public int numEdgeTriangles(Graph G, int u, int v)
 	{
+		int counter = 0;
 		LinkedList<Integer> listU = G.getAdjacentVertices(u);
 		LinkedList<Integer> listV = G.getAdjacentVertices(v);
-		if(!listU.contains(v)) {
-			return 0;
-		}
-		
-		
-		int length = G.getNumVertices();
-		boolean[] array= new boolean[length]; 
-		array[u] = true;
-		array[v] = true;
-		int counter = 0;
-		
-		
 		Iterator<Integer> iterator = listU.iterator();
 		
-		//check common adjacent vertices
-		int next;
 		while(iterator.hasNext()) {
-			next = iterator.next();
-			if(listV.contains(next)) {
+			if(listV.contains(iterator.next())) {
 				counter++;
-				array[next] = true;
-			}
-		}
-		
-		LinkedList<Integer> temp;
-		boolean hasU;
-		boolean hasV;
-		for(int i = 0; i < length; i++) {
-			if (array[i]) {
-				continue;
-			}
-			
-			temp = G.getAdjacentVertices(i);
-			hasU = temp.contains(u);
-			hasV = temp.contains(v);
-			
-			if(hasU && hasV) {
-				counter++;
-				array[i] = true;
-				continue;
-			}
-			
-			if(hasU && listV.contains(i)) {
-				counter++;
-				array[i] = true;
-				continue;
-			}
-			
-			if(hasV && listU.contains(i)) {
-				counter++;
-				array[i] = true;
-				continue;
 			}
 		}
 		
@@ -145,19 +99,6 @@ public class Part2 {
 	// Returns the total number of triangles in the graph
 	public int numTriangles(Graph G)
 	{
-		int length = G.getNumVertices();
-		int counter = 0;
-		
-		for(int i = 0; i < length; i++) {
-			for(int j = 0; j < length; j++) {
-				
-				if(i == j) {
-					continue;
-				}
-				
-				
-			}
-		}
 		return -1;
 	}
 	

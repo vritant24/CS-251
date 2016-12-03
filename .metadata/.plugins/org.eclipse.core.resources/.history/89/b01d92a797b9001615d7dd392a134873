@@ -80,61 +80,33 @@ public class Part2 {
 	// Returns the total number of triangles in the entire graph G that contain the edge (u,v)
 	public int numEdgeTriangles(Graph G, int u, int v)
 	{
-		LinkedList<Integer> listU = G.getAdjacentVertices(u);
-		LinkedList<Integer> listV = G.getAdjacentVertices(v);
-		if(!listU.contains(v)) {
-			return 0;
-		}
-		
-		
 		int length = G.getNumVertices();
 		boolean[] array= new boolean[length]; 
-		array[u] = true;
-		array[v] = true;
 		int counter = 0;
 		
-		
+		LinkedList<Integer> listU = G.getAdjacentVertices(u);
+		LinkedList<Integer> listV = G.getAdjacentVertices(v);
 		Iterator<Integer> iterator = listU.iterator();
 		
 		//check common adjacent vertices
-		int next;
 		while(iterator.hasNext()) {
-			next = iterator.next();
-			if(listV.contains(next)) {
+			if(listV.contains(iterator.next())) {
 				counter++;
-				array[next] = true;
 			}
 		}
 		
 		LinkedList<Integer> temp;
-		boolean hasU;
-		boolean hasV;
 		for(int i = 0; i < length; i++) {
-			if (array[i]) {
+			if(i == u || i == v) {
 				continue;
 			}
 			
 			temp = G.getAdjacentVertices(i);
-			hasU = temp.contains(u);
-			hasV = temp.contains(v);
-			
-			if(hasU && hasV) {
+			if(temp.contains(u) && temp.contains(v)) {
 				counter++;
-				array[i] = true;
-				continue;
+				array[i] = 1;
 			}
 			
-			if(hasU && listV.contains(i)) {
-				counter++;
-				array[i] = true;
-				continue;
-			}
-			
-			if(hasV && listU.contains(i)) {
-				counter++;
-				array[i] = true;
-				continue;
-			}
 		}
 		
 		return counter;

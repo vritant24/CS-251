@@ -115,8 +115,8 @@ public class Part2 {
 			}
 			
 			temp = G.getAdjacentVertices(i);
-			hasU = temp.contains(u);
-			hasV = temp.contains(v);
+			hasV = temp.contains(u);
+			boolean hasV = temp.contains(v);
 			
 			if(hasU && hasV) {
 				counter++;
