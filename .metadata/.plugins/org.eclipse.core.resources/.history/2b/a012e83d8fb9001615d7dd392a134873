@@ -1,7 +1,5 @@
 import java.util.Iterator;
 
-import sun.awt.image.ImageWatched.Link;
-
 /*		Part 2
  * 
  * 		TODO: Implement the following methods
@@ -80,18 +78,7 @@ public class Part2 {
 	// Returns the total number of triangles in the entire graph G that contain the edge (u,v)
 	public int numEdgeTriangles(Graph G, int u, int v)
 	{
-		int counter = 0;
-		LinkedList<Integer> listU = G.getAdjacentVertices(u);
-		LinkedList<Integer> listV = G.getAdjacentVertices(v);
-		Iterator<Integer> iterator = listU.iterator();
-		
-		while(iterator.hasNext()) {
-			if(listV.contains(iterator.next())) {
-				counter++;
-			}
-		}
-		
-		return counter;
+		return -1;
 	}
 	
 
