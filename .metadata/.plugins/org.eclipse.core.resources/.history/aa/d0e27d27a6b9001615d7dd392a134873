@@ -80,9 +80,6 @@ public class Part2 {
 	// Returns the total number of triangles in the entire graph G that contain the edge (u,v)
 	public int numEdgeTriangles(Graph G, int u, int v)
 	{
-		if(!G.hasEdge(u, v)) {
-			return 0;
-		}
 		int counter = 0;
 		LinkedList<Integer> listU = G.getAdjacentVertices(u);
 		LinkedList<Integer> listV = G.getAdjacentVertices(v);
