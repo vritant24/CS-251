@@ -25,7 +25,7 @@ public class Part1 {
 		}
 
 		//find median
-		Arrays.sort(track);
+		Arrays.parallelSort(track);
 		if(track.length % 2 == 1) {
 			return track[track.length / 2];
 		}
@@ -42,16 +42,6 @@ public class Part1 {
 	 * @return degree of vertex
 	 */
 	public int getDegree(Graph G, int vertex) {
-//		int counter = 0;
-//		for(int j = 0; j < G.numVertices; j++) {
-//			if(vertex == j) {
-//				continue;
-//			}
-//			if(G.hasEdge(vertex, j)) {
-//				counter++;
-//			}
-//		}
-//		return counter;
 		return G.getAdjacentVertices(vertex).size();
 	}
 
@@ -64,6 +54,7 @@ public class Part1 {
 		nByTwo = Math.ceil( ((double)G.getNumVertices()) / 2.0 );
 		LinkedList<Integer> temp;
 		
+		//find giant component
 		for(int i = 0; i < G.getNumVertices(); i++) {
 			temp = findGCC(G, i, new LinkedList<Integer>());
 			if(temp.size() >= nByTwo) {
@@ -73,25 +64,33 @@ public class Part1 {
 		return new LinkedList<Integer>();
 	}
 
+	/**
+	 * Finds if the vertex is a part of a chain >= nByTwo	
+	 * @param G
+	 * @param vertex
+	 * @param list
+	 * @return list if size >= nByTwo
+	 */
 	public LinkedList<Integer> findGCC(Graph G, int vertex, LinkedList<Integer> list) {
 		
 		if(list.size() >= nByTwo) {
 			return list;
 		}
 		
-		LinkedList<Integer> temp = G.getAdjacentVertices(vertex);
+		LinkedList<Integer> temp = G.getAdjacentVertices(vertex); // get adjacent vertices
 		
-		LinkedList<Integer> pass = new LinkedList<>();
+		LinkedList<Integer> pass = new LinkedList<>(); // list that is recursed
 		pass.add(vertex);
 		pass.addAll(list);
 		
-		LinkedList<Integer> bestOption = pass;
+		LinkedList<Integer> bestOption = pass; // stores best option
 		
-		Iterator<Integer> iterator = temp.iterator();
+		Iterator<Integer> iterator = temp.iterator(); // iterate through pass temp
 		
-		
+		//find chain of vertices
 		while(iterator.hasNext()) {
 			int next = iterator.next();
+			
 			if(pass.contains(next)) {
 				continue;
 			}
@@ -123,6 +122,7 @@ public class Part1 {
 			return false;
 		}
 		
+		//check if 5Clique
 		int[] array = new int[5];
 		for(int i = 0; i < 5; i++) {
 			array[i] = vertices.removeLast();

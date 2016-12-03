@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 /*		Part 2
  * 
  * 		TODO: Implement the following methods
@@ -18,7 +20,27 @@ public class Part2 {
 	// Returns the maximum in-degree in the graph G
 	public int maxInDegree(Graph G)
 	{
-		return 0;
+		int length = G.getNumVertices();
+		int[] array = new int[length];
+		
+		Iterator<Integer> iterator;
+		
+		for(int i = 0; i < length; i++) {
+			iterator = G.getAdjacentVertices(i).iterator();
+			while(iterator.hasNext()) {
+				array[iterator.next()]++;
+			}
+		}
+		
+		int max = 0;
+		
+		for(int i = 0; i < length; i++) {
+			if(array[i] > max) {
+				max = array[i];
+			}
+		}
+		
+		return max;
 	}
 	
 	
@@ -27,7 +49,18 @@ public class Part2 {
 	// Returns the maximum out degree in the graph G
 	public int maxOutDegree(Graph G)
 	{
-		return 0;
+		int length = G.getNumVertices();
+		int max = 0;
+		int tempSize;
+		
+		for(int i = 0; i < length; i++) {
+			tempSize = G.getAdjacentVertices(i).size();
+			if(tempSize > max) {
+				max = tempSize;
+			}
+		}
+		
+		return max;
 	}
 
 	
