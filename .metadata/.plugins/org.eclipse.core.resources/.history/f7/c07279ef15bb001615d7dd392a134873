@@ -102,24 +102,65 @@ public class Part2 {
 	// Returns the total number of triangles in the graph
 	public int numTriangles(Graph G)
 	{
-		int length = G.getNumVertices();
-		int count = 0;
-		
-		for(int i = 0; i < length; i++) {
-			for(int j = i; j < length; j++) {
-				if(!G.hasEdge(i, j)) {
-					continue;
-				}
-				for(int k = j; k < length; k++) {
-					if(G.hasEdge(i, k) && G.hasEdge(j, k)) {
-						count++;
-					}
-				}
-			}
-		}
-		
-		return count;
+		LinkedList<Struct> list= new LinkedList<>();
+		return -1;
 	}
+	
+	public int findNumTriangles(Graph G, int vertex) {
+		
+	}
+	
+	public Struct makeStruct(int a, int b, int c) {
+		
+		//compare taken from http://stackoverflow.com/questions/13040240/fastest-way-to-sort-3-values-in-java
+		int x, y, z;
+		if( a > b ){
+			 if( a > c ){
+			  x = a;
+			  if( b > c ){
+			   y = b;
+			   z = c;
+			  }else{
+			   y = c;
+			   z = b;
+			  }
+			 }else{
+			  y = a;
+			  x = c;
+			  z = b;
+			 }
+			}else{
+			 if( b > c ){
+			  x = b;
+			  if( a > c ){
+			   y = a;
+			   z = c;
+			  }else{
+			   y = c;
+			   z = a;
+			  }
+			 }else{
+			  y = b;
+			  x = c;
+			  z = a;
+			 }
+			}
+		Struct temp = new Struct(x,y,z);
+		return temp;
+	}
+	
+	class Struct {
+		public
+		int x;
+		int y; 
+		int z;
+		
+		public Struct(int x, int y, int z) {
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+	};
 	
 	// TODO:
 	// Returns the vertex clustering coefficient of v

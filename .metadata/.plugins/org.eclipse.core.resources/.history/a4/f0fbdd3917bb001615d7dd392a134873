@@ -117,7 +117,7 @@ public class LinkedList<Item> implements Iterable<Item> {
 	public void remove(Item item)
 	{
 		Node temp = first;
-		if(temp.item.equals(item))
+		if(temp.item == item)
 		{
 			first = first.next;
 			n--;
@@ -125,7 +125,7 @@ public class LinkedList<Item> implements Iterable<Item> {
 		}
 		while(temp.next != null)
 		{
-			if(temp.next.item.equals(item))
+			if(temp.next.item == item)
 			{
 				temp.next = temp.next.next;
 				n--;
@@ -162,7 +162,7 @@ public class LinkedList<Item> implements Iterable<Item> {
 		int itemCount = 0;
 		while(it != null)
 		{
-			if(it.item.equals(item))
+			if(it.item == item)
 			{
 				itemCount++;
 				if(itemCount == 2)

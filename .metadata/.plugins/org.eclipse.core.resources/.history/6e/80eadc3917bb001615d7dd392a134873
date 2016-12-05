@@ -2,7 +2,8 @@
 *		This abstract class represents the basic functions required to work with a graph
 *		Specific implementations of this abstract class are ListGraph and MatrixGraph
 *
-*		You may NOT edit this file - it will be replaced during grading!
+*		You may edit this file, including adding additional methods as you see fit
+*       This file must be submitted
 */
 
 import java.util.Scanner;
@@ -30,6 +31,7 @@ public abstract class Graph
 	abstract void removeEdge(int u, int v);
 	
 	abstract LinkedList<Integer> getAdjacentVertices(int v);
+
 
 	public int getNumVertices()
 	{

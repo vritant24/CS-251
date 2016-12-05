@@ -3,7 +3,6 @@
 *	Implements an adjacency matrix version of a graph
 *	Implements the abstract class Graph
 *	
-*	You must submit this file
 */
 
 import java.util.Scanner;
@@ -40,10 +39,7 @@ public class MatrixGraph extends Graph
 
 	public boolean hasEdge(int u, int v)
 	{
-		if(adjMatrix[u][v] == 1) {
-			return true;
-		}
-		return false;
+		return (adjMatrix[u][v] > 0);
 	}
 
 	public void removeEdge(int u, int v)
@@ -52,15 +48,11 @@ public class MatrixGraph extends Graph
 	}
 
 	LinkedList<Integer> getAdjacentVertices(int v) {
-		LinkedList<Integer> temp = new LinkedList<>();
-		
-		for(int i = 0; i < adjMatrix[0].length; i++) {
-			if(adjMatrix[v][i] == 1) {
-					temp.add(i);
-			}
-		}
-		
-		return temp;
+		LinkedList<Integer> adjEdges = new LinkedList<Integer>();
+		for(int i = 0; i < numVertices; i++)
+			if(adjMatrix[v][i] > 0)
+				adjEdges.add(i);
+		return adjEdges;
 	}
 
 }

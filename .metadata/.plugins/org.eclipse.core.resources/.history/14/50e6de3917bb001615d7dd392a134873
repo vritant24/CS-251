@@ -1,28 +1,21 @@
-/*	ListGraph.java
+/*	MatrixGraph.java
 *
-*	Implements an Adjacency List version of a Graph
+*	Implements an adjacency matrix version of a graph
 *	Implements the abstract class Graph
-*
+*	
+*	You must submit this file
 */
 
 import java.util.Scanner;
 
-public class ListGraph extends Graph
+public class MatrixGraph extends Graph
 {
+	private int[][] adjMatrix;
 
-	private LinkedList<Integer>[] adjLists;
-
-	@SuppressWarnings("unchecked")
-	public ListGraph(Scanner input)
+	public MatrixGraph(Scanner input)
 	{
 		super(input);
-
-		adjLists = new LinkedList[numVertices];
-
-		for(int i = 0; i < numVertices; i++)
-		{
-			adjLists[i] = new LinkedList<Integer>();
-		}
+		adjMatrix = new int[numVertices][numVertices];
 
 		for(int i = 0; i < numVertices; i++)
 		{
@@ -42,22 +35,32 @@ public class ListGraph extends Graph
 
 	public void addEdge(int u, int v)
 	{
-		if(!adjLists[u].contains(v))
-			adjLists[u].add(v);
+		adjMatrix[u][v] = 1;
 	}
 
 	public boolean hasEdge(int u, int v)
 	{
-		return adjLists[u].contains(v);
+		if(adjMatrix[u][v] == 1) {
+			return true;
+		}
+		return false;
 	}
 
 	public void removeEdge(int u, int v)
 	{
-		adjLists[u].remove(v);
+		adjMatrix[u][v] = 0;
 	}
-
 
 	LinkedList<Integer> getAdjacentVertices(int v) {
-		return adjLists[v];
+		LinkedList<Integer> temp = new LinkedList<>();
+		
+		for(int i = 0; i < adjMatrix[0].length; i++) {
+			if(adjMatrix[v][i] == 1) {
+					temp.add(i);
+			}
+		}
+		
+		return temp;
 	}
+
 }

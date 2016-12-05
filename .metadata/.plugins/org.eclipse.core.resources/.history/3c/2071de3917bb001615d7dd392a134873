@@ -3,6 +3,7 @@
 *	Implements an Adjacency List version of a Graph
 *	Implements the abstract class Graph
 *
+*	You must submit this file
 */
 
 import java.util.Scanner;
@@ -42,22 +43,31 @@ public class ListGraph extends Graph
 
 	public void addEdge(int u, int v)
 	{
-		if(!adjLists[u].contains(v))
 			adjLists[u].add(v);
 	}
 
 	public boolean hasEdge(int u, int v)
 	{
-		return adjLists[u].contains(v);
+		if(adjLists[u].contains(v)) {
+			return true;
+		}
+		return false;
 	}
 
 	public void removeEdge(int u, int v)
 	{
-		adjLists[u].remove(v);
+		if(hasEdge(u, v)) {
+			adjLists[u].remove(v);
+		}
 	}
 
 
 	LinkedList<Integer> getAdjacentVertices(int v) {
-		return adjLists[v];
+		LinkedList<Integer> temp = new LinkedList<>();
+		temp.add(-1);
+		temp.addAll(adjLists[v]);
+		temp.remove(-1);
+		return temp;
 	}
+
 }
