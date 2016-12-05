@@ -143,20 +143,13 @@ public class Part2 {
 			 }
 			}
 		Struct temp = new Struct(x,y,z);
-		return temp;
 	}
 	
 	class Struct {
-		public
+		public:
 		int x;
 		int y; 
 		int z;
-		
-		public Struct(int x, int y, int z) {
-			this.x = x;
-			this.y = y;
-			this.z = z;
-		}
 	};
 	
 	// TODO:

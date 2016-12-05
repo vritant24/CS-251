@@ -143,7 +143,6 @@ public class Part2 {
 			 }
 			}
 		Struct temp = new Struct(x,y,z);
-		return temp;
 	}
 	
 	class Struct {

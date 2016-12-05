@@ -105,59 +105,18 @@ public class Part2 {
 		return -1;
 	}
 	
-	public int findNumTriangles(Graph G, int vertex) {
-		
-	}
-	
-	public Struct makeStruct(int a, int b, int c) {
-		int x, y, z;
-		if( a > b ){
-			 if( a > c ){
-			  x = a;
-			  if( b > c ){
-			   y = b;
-			   z = c;
-			  }else{
-			   y = c;
-			   z = b;
-			  }
-			 }else{
-			  y = a;
-			  x = c;
-			  z = b;
-			 }
-			}else{
-			 if( b > c ){
-			  x = b;
-			  if( a > c ){
-			   y = a;
-			   z = c;
-			  }else{
-			   y = c;
-			   z = a;
-			  }
-			 }else{
-			  y = b;
-			  x = c;
-			  z = a;
-			 }
-			}
-		Struct temp = new Struct(x,y,z);
-		return temp;
-	}
-	
-	class Struct {
-		public
-		int x;
-		int y; 
-		int z;
-		
-		public Struct(int x, int y, int z) {
-			this.x = x;
-			this.y = y;
-			this.z = z;
+	public Point makePoint(int a, int b) {
+		Point p = new Point();
+		if(a < b) {
+			p.x = a;
+			p.y = b;
 		}
-	};
+		else {
+			p.x = b;
+			p.y = a;
+		}
+		return p;
+	}
 	
 	// TODO:
 	// Returns the vertex clustering coefficient of v
@@ -175,7 +134,5 @@ public class Part2 {
 	{
 		return 0.0;
 	}
-	
-	
-	
+
 }
