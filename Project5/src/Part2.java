@@ -1,4 +1,5 @@
 import java.awt.Point;
+import java.util.Arrays;
 import java.util.Iterator;
 
 
@@ -73,7 +74,29 @@ public class Part2 {
 	// Returns an empty linked list if there are none or more than one cycle
 	public LinkedList<Integer> hasOneCycle(Graph G)
 	{
+		int length = G.getNumVertices();
 		return new LinkedList<Integer>();
+	}
+	
+	public boolean isCycle(Graph G, int vertex, int depth, boolean[] array, int end) {
+		LinkedList<Integer> list = G.getAdjacentVertices(vertex);
+		Iterator<Integer> iterator = list.iterator();
+		
+		if(depth > 2) {
+			if(end == vertex) {
+				return true;
+			}
+		}
+		
+		boolean[] temp = Arrays.copyOf(array, array.length);
+		temp[vertex] = true;
+		for(int i = 0; i < list.size(); i++) {
+			if(isCycle(G, iterator.next(), depth + 1, temp, end)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 	// TODO:
@@ -127,15 +150,55 @@ public class Part2 {
 	// that are adjacent to v that are also adjacent to each other.
 	public double vertexClusterCoeff(Graph G, int v)
 	{
-		return 0.0;
+		LinkedList<Integer> list = G.getAdjacentVertices(v);
+		Iterator<Integer> iterator = list.iterator();
+		Iterator<Integer> iterator2;
+		double denominator = calcDenom(list.size() - 1);
+		double count = 0;
+		
+		if(denominator == 0) { return 0;}
+		int next;
+		int track = 0;
+		
+		while(iterator.hasNext()) {
+			next = iterator.next();
+			iterator2 = list.iterator();
+			for(int i = 0; i < track; i++) {
+				if(!iterator2.hasNext()) {
+					break;
+				}
+				iterator2.next();
+			}
+			while(iterator2.hasNext()) {
+				if(G.hasEdge(next, iterator2.next())) {
+					count++;
+				}
+			}
+			track++;
+		}
+		return count/denominator;
 	}
 	
+	public double calcDenom(int a) {
+		int count = 0;
+		for(int i = 0; i <= a; i++) {
+			count += i;
+		}
+		return count;
+	}
 
 	// TODO:
 	// Returns the average of all n vertices clustering coefficients
 	public double globalClusterCoeff(Graph G)
 	{
-		return 0.0;
+		double count = 0;
+		int length = G.getNumVertices();
+		
+		for(int i = 0; i < length; i++) {
+			count += vertexClusterCoeff(G, i);
+		}
+		
+		return count / (double)length;
 	}
 	
 	
