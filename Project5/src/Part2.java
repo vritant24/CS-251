@@ -2,6 +2,8 @@ import java.awt.Point;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import sun.awt.image.ImageWatched.Link;
+
 
 /*		Part 2
  * 
@@ -75,30 +77,79 @@ public class Part2 {
 	public LinkedList<Integer> hasOneCycle(Graph G)
 	{
 		int length = G.getNumVertices();
-		return new LinkedList<Integer>();
+		boolean haveOne = false;
+		int vertex = 0;
+		boolean result;
+		boolean[] array;
+		
+		for(int i = 0; i < length; i++) {
+			array = new boolean[length];
+			result = isCycle(G, i, 0, array, i);
+			if(result && haveOne) {
+				return new LinkedList<Integer>();
+			}
+			if(result) {
+				vertex = i;
+				haveOne = result;
+			}
+		}
+		
+		if(!haveOne) {
+			return new LinkedList<Integer>();
+		}
+		return getCycle(G, vertex, vertex, new LinkedList<Integer>());
 	}
 	
 	public boolean isCycle(Graph G, int vertex, int depth, boolean[] array, int end) {
 		LinkedList<Integer> list = G.getAdjacentVertices(vertex);
 		Iterator<Integer> iterator = list.iterator();
 		
-		if(depth > 2) {
-			if(end == vertex) {
+		if(depth > 0) {
+			if(list.contains(end)) {
 				return true;
 			}
 		}
+		array[vertex] = true;
 		
 		boolean[] temp = Arrays.copyOf(array, array.length);
-		temp[vertex] = true;
-		for(int i = 0; i < list.size(); i++) {
-			if(isCycle(G, iterator.next(), depth + 1, temp, end)) {
-				return true;
+		
+		if(vertex != end) {
+			temp[vertex] = true;
+		}
+		while(iterator.hasNext()) {
+			int next = iterator.next();
+			if(next <= end) {
+				continue;
+			}
+			if(!array[next]) {
+				if(isCycle(G, next, depth + 1, temp, end)) {
+					return true;
+				}
 			}
 		}
 		
 		return false;
 	}
 
+	public LinkedList<Integer> getCycle(Graph G, int vertex, int end, LinkedList<Integer> list ) {
+		LinkedList<Integer> temp = G.getAdjacentVertices(vertex);
+		Iterator<Integer> iterator = temp.iterator();
+		if(temp.contains(end)) {
+			list.add(vertex); 
+			return list;
+		}
+		
+		while(iterator.hasNext()) {
+			getCycle(G, iterator.next(), end, list);
+			if(list.size() > 0) {
+				list.add(vertex);
+				break;
+			}
+		}
+		
+		return list;
+	}
+	
 	// TODO:
 	// Returns the total number of triangles in the entire graph G that contain the edge (u,v)
 	public int numEdgeTriangles(Graph G, int u, int v)
